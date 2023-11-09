@@ -209,6 +209,18 @@ def index():
     # 获得活动日志
     Activity = WebAction().get_library_playhistory().get("result")
 
+    # 获得继续观看
+    PlayingSessions = WebAction().get_playing_sessions()
+
+    # 获得所有媒体列表
+    AllMedias = WebAction().get_all_medias()
+
+    # 获取继续观看媒体列表
+    ResumeMedias = WebAction().get_resume_medias()
+    print("ResumeMedias")
+    print(ResumeMedias)
+    print("ResumeMedias")
+
     # 磁盘空间
     LibrarySpaces = WebAction().get_library_spacesize()
 
@@ -232,7 +244,8 @@ def index():
                            MovieNums=TransferStatistics.get("MovieNums"),
                            TvNums=TransferStatistics.get("TvNums"),
                            AnimeNums=TransferStatistics.get("AnimeNums"),
-                           MediaServerType=MSType
+                           MediaServerType=MSType,
+                           LoginWallpaper=get_login_wallpaper(),
                            )
 
 

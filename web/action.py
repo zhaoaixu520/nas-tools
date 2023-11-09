@@ -3453,6 +3453,65 @@ class WebAction:
             }
         else:
             return {"code": -1, "msg": "媒体库服务器连接失败"}
+        
+    @staticmethod
+    def get_playing_sessions():
+        """
+        查询媒体库统计数据1
+        """
+        MediaServerClient = MediaServer()
+        playing_sessions = MediaServerClient.get_playing_sessions()
+        print(playing_sessions)
+        # if playing_sessions:
+        #     return {
+        #         "code": 0,
+        #         "Movie": "{:,}".format(media_counts.get('MovieCount')),
+        #         "Series": "{:,}".format(media_counts.get('SeriesCount')),
+        #         "Episodes": "{:,}".format(media_counts.get('EpisodeCount')) if media_counts.get(
+        #             'EpisodeCount') else "",
+        #         "Music": "{:,}".format(media_counts.get('SongCount')),
+        #         "User": UserCount
+        #     }
+        # else:
+        #     return {"code": -1, "msg": "媒体库服务器连接失败"}
+
+    @staticmethod
+    def get_all_medias():
+        """
+        获取所有媒体列表
+        """
+        MediaServerClient = MediaServer()
+        all_medias = MediaServerClient.get_all_medias()
+        if all_medias:
+            data = all_medias.get("Items")
+            return {
+                "code":0,
+                "data": data
+            }
+        else :
+            return {
+                "code":-1,
+                "data":[]
+            }
+
+    @staticmethod
+    def get_resume_medias():
+        """
+        获取继续观看媒体列表
+        """
+        MediaServerClient = MediaServer()
+        all_medias = MediaServerClient.get_resume_medias()
+        if all_medias:
+            data = all_medias.get("Items")
+            return {
+                "code":0,
+                "data": data
+            }
+        else :
+            return {
+                "code":-1,
+                "data":[]
+            }
 
     @staticmethod
     def get_library_playhistory(data=None):

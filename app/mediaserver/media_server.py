@@ -244,3 +244,19 @@ class MediaServer:
         if not self.server:
             return None
         return self.server.get_playing_sessions()
+
+    def get_all_medias(self):
+        """
+        获取所有媒体列表
+        """
+        if not self.server:
+            return None
+        return self.server.get_all_medias()
+    
+    def get_resume_medias(self):
+        """
+        获取继续观看媒体列表
+        """
+        if not self.server:
+            return None
+        return self.server.get_resume_medias()

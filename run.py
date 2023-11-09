@@ -96,11 +96,6 @@ def get_run_config():
 
         while check_port(_web_host, _web_port):
             _web_port = _web_port+1
-
-        # if check_port(_web_host, _web_port):
-        #     _web_port = _web_port+1
-        # else:
-        #     _web_port = _web_port
         print("当前端口是：%s" % str(_web_port))
         _ssl_cert = app_conf.get('ssl_cert')
         _ssl_key = app_conf.get('ssl_key')

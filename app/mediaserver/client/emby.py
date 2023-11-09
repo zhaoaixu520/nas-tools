@@ -490,3 +490,48 @@ class Emby(_IMediaClient):
         except Exception as e:
             ExceptionUtils.exception_traceback(e)
             return []
+        
+    def get_all_medias(self):
+        """
+          获取所有媒体列表
+        """
+        if not self._host or not self._apikey or not self._user:
+            return []
+        all_medias = []
+        req_url = "%semby/Users/%s/Views?api_key=%s" % (self._host, self._user, self._apikey)
+        try:
+            res = RequestUtils().get_res(req_url)
+            if res and res.status_code == 200:
+                all_medias = res.json()
+            return all_medias
+        except Exception as e:
+            ExceptionUtils.exception_traceback(e)
+            return []
+
+
+    def get_resume_medias(self):
+      """
+        获取继续观看媒体列表
+      """
+      if not self._host or not self._apikey or not self._user:
+          return []
+      resume_medias = []
+      req_url = "%semby/Users/%s/Items/Resume?api_key=%s&Recursive=true" % (self._host, self._user, self._apikey)
+      try:
+          res = RequestUtils().get_res(req_url)
+          if res and res.status_code == 200:
+              resume_medias = res.json()
+          return resume_medias
+      except Exception as e:
+          ExceptionUtils.exception_traceback(e)
+          return []
+    
+    def get_latest_moives(self):
+        """
+         获取最新未播放的movies列表
+        """
+        # /Users/{UserId}/Items/Latest?IncludeItemTypes=Movie&Limit=20&IsPlayed=false
+        if not self._host or not self._apikey:
+            return []
+        latest_moives = []
+        req_url = "%semby/Sessions?api_key=%s" % (self._host, self._apikey)
