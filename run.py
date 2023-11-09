@@ -3,6 +3,7 @@ import signal
 import sys
 import time
 import warnings
+import socket
 
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
@@ -59,6 +60,22 @@ def sigal_handler(num, stack):
         # 退出主进程
         sys.exit()
 
+def check_port(ip, port):
+    sock = socket.socket(socket.AF_INET, -1)
+    # sock.timeout(5)
+    time.sleep(5)
+
+    try: 
+        result = sock.connect_ex(("127.0.0.1",port))
+        if result == 0:
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(e)
+    finally:
+         sock.close()
+
 
 def get_run_config():
     """
@@ -75,6 +92,16 @@ def get_run_config():
         if app_conf.get("web_host"):
             _web_host = app_conf.get("web_host").replace('[', '').replace(']', '')
         _web_port = int(app_conf.get('web_port')) if str(app_conf.get('web_port', '')).isdigit() else 3000
+        print(_web_port, _web_host)
+
+        while check_port(_web_host, _web_port):
+            _web_port = _web_port+1
+
+        # if check_port(_web_host, _web_port):
+        #     _web_port = _web_port+1
+        # else:
+        #     _web_port = _web_port
+        print("当前端口是：%s" % str(_web_port))
         _ssl_cert = app_conf.get('ssl_cert')
         _ssl_key = app_conf.get('ssl_key')
         _ssl_key = app_conf.get('ssl_key')
