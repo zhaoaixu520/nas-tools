@@ -209,8 +209,6 @@ def index():
     # 获得活动日志
     Activity = WebAction().get_library_playhistory().get("result")
 
-    # 获得继续观看
-    PlayingSessions = WebAction().get_playing_sessions()
 
     # 获得所有媒体列表
     AllMedias = WebAction().get_all_medias()
@@ -223,9 +221,9 @@ def index():
 
     if AllMedias.get('code') == 0:
       all_medias = AllMedias.get('data')
-      for allMedias in all_medias:
+      for i, allMedias in enumerate(all_medias):
           if WebAction().get_latest_media_List(allMedias.get('Id')).get("code") == 0:
-            LatestMedias.append(WebAction().get_latest_media_List(allMedias.get('Id')).get("data"))
+            LatestMedias.append({"name":allMedias.get("Name"),"data":WebAction().get_latest_media_List(allMedias.get('Id')).get("data")})
 
     # 磁盘空间
     LibrarySpaces = WebAction().get_library_spacesize()
@@ -251,7 +249,9 @@ def index():
                            TvNums=TransferStatistics.get("TvNums"),
                            AnimeNums=TransferStatistics.get("AnimeNums"),
                            MediaServerType=MSType,
-                           LoginWallpaper=get_login_wallpaper(),
+                           AllMedias=AllMedias.get('data'),
+                           ResumeMedias=ResumeMedias.get('data'),
+                           LatestMedias=LatestMedias
                            )
 
 

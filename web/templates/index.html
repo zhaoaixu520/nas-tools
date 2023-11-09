@@ -2,6 +2,9 @@
 {% import 'macro/oops.html' as OOPS %}
 <div class="container-xl">
   <!-- Page title -->
+  <!-- AllMedias=AllMedias,
+                           ResumeMedias=ResumeMedias,
+                           LatestMedias=LatestMedias -->
   <div class="page-header d-print-none">
     <div class="row align-items-center">
       <div class="col">
@@ -29,6 +32,11 @@
       <div class="row row-deck row-cards">
         <div class="col-12 col-md-6 col-lg-3">
           <div class="card">
+            <div class="card-stamp">
+              <div class="card-stamp-icon">
+                <img src="../static/img/movie.jpg">
+              </div>
+            </div>
             <div class="card-body">
               <div class="d-flex align-items-center">
                 <div class="subheader">电影</div>
@@ -42,6 +50,11 @@
         </div>
         <div class="col-12 col-md-6 col-lg-3">
           <div class="card">
+            <div class="card-stamp">
+              <div class="card-stamp-icon">
+                <img src="../static/img/tv.png">
+              </div>
+            </div>
             <div class="card-body">
               <div class="d-flex align-items-center">
                 <div class="subheader">电视剧/动漫</div>
@@ -55,13 +68,13 @@
                 </div>
               </div>
             </div>
-            <div id="chart-tv-bg" class="chart-sm"></div>
+            <div id="chart-tv-bg" class="chart-sm" style="background-image: url(../static/img/tv_bg.png)"></div>
           </div>
         </div>
         <div class="col-12 col-md-6 col-lg-3">
           <div class="card">
             <div class="card-stamp">
-              <div class="card-stamp-icon" style="background-color: transparent">
+              <div class="card-stamp-icon">
                 <img src="../static/img/music.png">
               </div>
             </div>
@@ -78,7 +91,7 @@
         <div class="col-12 col-md-6 col-lg-3">
           <div class="card">
             <div class="card-stamp">
-              <div class="card-stamp-icon" style="background-color: transparent">
+              <div class="card-stamp-icon" >
                 <img src="../static/img/users.png">
               </div>
             </div>
@@ -92,7 +105,62 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-12">
+        <div>
+          <h2>我的媒体</h2>
+          {% for AllMedia in AllMedias %}
+          <button class="col col-auto" style="border:none; padding:0px;">
+            <div style="width: 32rem; height: 18rem; background-image: url(../static/img/tv_bg.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            background-position: center 0;"></div>
+            <button type="button" style="border:none; padding:0px;"> 
+              <p>{{ AllMedia.Name }}</p>
+            </button>
+          </button>
+          {% endfor %}
+        </div>
+
+        <div>
+          <h2>继续观看</h2>
+          {% for ResumeMedia in ResumeMedias %}
+          <button class="col col-auto" style="border:none; padding:0px;">
+            <div style="width: 32rem; height: 18rem; background-image: url(../static/img/tv_bg.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            background-position: center 0;"></div>
+            <button type="button" style="border:none; padding:0px;"> 
+              <p>{{ ResumeMedia.Name }}</p>
+            </button>
+          </button>
+          {% endfor %}
+        </div>
+
+        <div>
+          {% for LatestMedia in LatestMedias %}
+          <div>
+          <h2>{{ LatestMedia.name }}</h2>
+          {% for media in LatestMedia.data %}
+          <button class="col col-auto" style="border:none; padding:0px;">
+            <div style="width: 32rem; height: 18rem; background-image: url(../static/img/tv_bg.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            background-position: center 0;"></div>
+            <button type="button" style="border:none; padding:0px;"> 
+              <p>{{ media.Name }}</p>
+            </button>
+          </button>
+          {% endfor %}
+        </div>
+          {% endfor %}
+        </div>
+
+        <!-- <div class="col-lg-12">
           <div class="row row-cards">
             <div class="col-12">
               <div class="card">
@@ -149,7 +217,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
