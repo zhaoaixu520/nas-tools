@@ -260,3 +260,11 @@ class MediaServer:
         if not self.server:
             return None
         return self.server.get_resume_medias()
+    
+    def get_latest_moives(self):
+        """
+        获取最新未播放的movies列表
+        """
+        if not self.server:
+            return None
+        return self.server.get_latest_moives()

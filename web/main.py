@@ -217,9 +217,14 @@ def index():
 
     # 获取继续观看媒体列表
     ResumeMedias = WebAction().get_resume_medias()
-    print("ResumeMedias")
-    print(ResumeMedias)
-    print("ResumeMedias")
+
+    # 获取最新未播放的movies列表
+    LatestMoives = WebAction().get_latest_moives()
+    
+    
+    print("LatestMoives")
+    print(LatestMoives)
+    print("LatestMoives")
 
     # 磁盘空间
     LibrarySpaces = WebAction().get_library_spacesize()

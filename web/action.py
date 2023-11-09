@@ -3514,6 +3514,24 @@ class WebAction:
             }
 
     @staticmethod
+    def get_latest_moives():
+        """
+        获取最新未播放的movies列表
+        """
+        MediaServerClient = MediaServer()
+        latest_moives = MediaServerClient.get_latest_moives()
+        if latest_moives:
+            return {
+                "code":0,
+                "data": latest_moives
+            }
+        else :
+            return {
+                "code":-1,
+                "data":[]
+            }
+
+    @staticmethod
     def get_library_playhistory(data=None):
         """
         查询媒体库播放记录

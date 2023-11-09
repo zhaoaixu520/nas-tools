@@ -530,8 +530,15 @@ class Emby(_IMediaClient):
         """
          获取最新未播放的movies列表
         """
-        # /Users/{UserId}/Items/Latest?IncludeItemTypes=Movie&Limit=20&IsPlayed=false
-        if not self._host or not self._apikey:
+        if not self._host or not self._apikey or not self._user:
             return []
         latest_moives = []
-        req_url = "%semby/Sessions?api_key=%s" % (self._host, self._apikey)
+        req_url = "%semby/Users/%s/Items/Latest?api_key=%s&Recursive=true&Limit=16&MediaTypes=Video" % (self._host, self._user, self._apikey)
+        try:
+            res = RequestUtils().get_res(req_url)
+            if res and res.status_code == 200:
+              latest_moives = res.json()
+            return latest_moives
+        except Exception as e:
+            ExceptionUtils.exception_traceback(e)
+        return []
