@@ -526,19 +526,19 @@ class Emby(_IMediaClient):
           ExceptionUtils.exception_traceback(e)
           return []
     
-    def get_latest_moives(self):
+    def get_latest_media_List(self, parentId):
         """
-         获取最新未播放的movies列表
+         获取最新未播放的媒体列表
         """
         if not self._host or not self._apikey or not self._user:
             return []
-        latest_moives = []
-        req_url = "%semby/Users/%s/Items/Latest?api_key=%s&Recursive=true&Limit=16&MediaTypes=Video" % (self._host, self._user, self._apikey)
+        latest_medias = []
+        req_url = "%semby/Users/%s/Items/Latest?api_key=%s&Recursive=true&Limit=16&ImageTypeLimit=1&EnableImageTypes=Primary&ParentId=%s" % (self._host, self._user, self._apikey, parentId)
         try:
             res = RequestUtils().get_res(req_url)
             if res and res.status_code == 200:
-              latest_moives = res.json()
-            return latest_moives
+              latest_medias = res.json()
+            return latest_medias
         except Exception as e:
             ExceptionUtils.exception_traceback(e)
         return []

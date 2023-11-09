@@ -3514,16 +3514,16 @@ class WebAction:
             }
 
     @staticmethod
-    def get_latest_moives():
+    def get_latest_media_List(parentId):
         """
         获取最新未播放的movies列表
         """
         MediaServerClient = MediaServer()
-        latest_moives = MediaServerClient.get_latest_moives()
-        if latest_moives:
+        latest_medias = MediaServerClient.get_latest_media_List(parentId)
+        if latest_medias:
             return {
                 "code":0,
-                "data": latest_moives
+                "data": latest_medias
             }
         else :
             return {
