@@ -22,6 +22,11 @@ def get_login_wallpaper(today=datetime.datetime.strftime(datetime.datetime.now()
         res = RequestUtils().get_res(img_url)
         if res and res.status_code == 200:
             return base64.b64encode(res.content).decode()
+        else :
+            img_url = __get_themoviedb_wallpaper(today)
+            res = RequestUtils().get_res(img_url)
+            if res and res.status_code == 200:
+                return base64.b64encode(res.content).decode()
     return ""
 
 
