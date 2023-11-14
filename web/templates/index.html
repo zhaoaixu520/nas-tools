@@ -68,7 +68,7 @@
                 </div>
               </div>
             </div>
-            <div id="chart-tv-bg" class="chart-sm" style="background-image: url(../static/img/tv_bg.png)"></div>
+            <!-- <div id="chart-tv-bg" class="chart-sm" style="background-image: url(../static/img/tv_bg.png)"></div> -->
           </div>
         </div>
         <div class="col-12 col-md-6 col-lg-3">
@@ -105,57 +105,70 @@
             </div>
           </div>
         </div>
-        <div>
+        <div class="container">
           <h2>我的媒体</h2>
-          {% for AllMedia in AllMedias %}
-          <button class="col col-auto" style="border:none; padding:0px;">
-            <div style="width: 32rem; height: 18rem; background-image: url(../static/img/tv_bg.png);
-            background-repeat: no-repeat;
-            background-size: cover;
-            -webkit-background-size: cover;
-            -o-background-size: cover;
-            background-position: center 0;"></div>
-            <button type="button" style="border:none; padding:0px;"> 
-              <p>{{ AllMedia.Name }}</p>
-            </button>
-          </button>
-          {% endfor %}
+          <div class="custom-scroll-view">
+            {% for AllMedia in AllMedias %}
+              <button class="custom-scroll-list" >
+                <div class="bg-image" style="background-image: url(../static/img/tv_bg.png);
+                background-repeat: no-repeat;
+                background-size: cover;
+                -webkit-background-size: cover;
+                -o-background-size: cover;
+                background-position: center 0;"></div>
+                <p style="margin-top: 4px;">{{ AllMedia.Name }}</p>
+              </button>
+            {% endfor %}
+          </div>
         </div>
 
         <div>
           <h2>继续观看</h2>
-          {% for ResumeMedia in ResumeMedias %}
-          <button class="col col-auto" style="border:none; padding:0px;">
-            <div style="width: 32rem; height: 18rem; background-image: url(../static/img/tv_bg.png);
-            background-repeat: no-repeat;
-            background-size: cover;
-            -webkit-background-size: cover;
-            -o-background-size: cover;
-            background-position: center 0;"></div>
-            <button type="button" style="border:none; padding:0px;"> 
-              <p>{{ ResumeMedia.Name }}</p>
+          <div class="custom-scroll-view">
+            {% for ResumeMedia in ResumeMedias %}
+            <button class="custom-scroll-list">
+              <div class="bg-image" style="background-image: url(../static/img/tv_bg.png);
+              background-repeat: no-repeat;
+              background-size: cover;
+              -webkit-background-size: cover;
+              -o-background-size: cover;
+              background-position: center 0;">
+              </div>
+              <p style="margin-top: 4px; 
+                overflow: hidden;
+                white-space: nowrap; 
+                text-overflow: ellipsis; 
+                width: 23rem; ">
+                {{ ResumeMedia.Name }}
+              </p>
             </button>
-          </button>
-          {% endfor %}
+            {% endfor %}
+          </div>
         </div>
 
         <div>
           {% for LatestMedia in LatestMedias %}
           <div>
           <h2>{{ LatestMedia.name }}</h2>
-          {% for media in LatestMedia.data %}
-          <button class="col col-auto" style="border:none; padding:0px;">
-            <div style="width: 32rem; height: 18rem; background-image: url(../static/img/tv_bg.png);
-            background-repeat: no-repeat;
-            background-size: cover;
-            -webkit-background-size: cover;
-            -o-background-size: cover;
-            background-position: center 0;"></div>
-            <button type="button" style="border:none; padding:0px;"> 
-              <p>{{ media.Name }}</p>
+          <div class="custom-scroll-view">
+            {% for media in LatestMedia.data %}
+            <button  class="custom-scroll-list">
+              <div class="bg-image" style="background-image: url(../static/img/tv_bg.png);
+              background-repeat: no-repeat;
+              background-size: cover;
+              -webkit-background-size: cover;
+              -o-background-size: cover;
+              background-position: center 0;"></div>
+              <p style="margin-top: 4px; 
+                overflow: hidden;
+                white-space: nowrap; 
+                text-overflow: ellipsis; 
+                width: 23rem; ">
+                {{ media.Name }}
+              </p>
             </button>
-          </button>
-          {% endfor %}
+            {% endfor %}
+         </div>
         </div>
           {% endfor %}
         </div>
@@ -415,3 +428,51 @@
   }
 
 </script>
+
+<style>
+  .custom-scroll-view {
+    width: 100%;
+    display: flex; /* 使用 Flex 布局 */
+    flex-direction: row;
+    border: none;
+    padding: 0; /* 去掉列表项的内边距 */
+    overflow-x: auto;
+
+    scrollbar-width: thin !important; /* 适用于 Firefox */
+    scrollbar-color: transparent transparent !important; /* 适用于 Firefox */
+
+    /* 适用于 Webkit（Chrome、Safari等） */
+    &::-webkit-scrollbar {
+      width: 6px !important; /* 设置滚动条宽度 */
+      background-color: transparent !important;
+      width: 0px !important;
+      height: 0px !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: transparent !important; /* 设置滑块颜色 */
+    }
+  }
+  /* 自定义样式，用于设置横向滚动列表的大小和布局 */
+  .custom-scroll-view .custom-scroll-list {
+    width: 23rem;
+    border: none;
+    white-space: nowrap;
+    display: flex; /* 使用 Flex 布局 */
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px; /* 设置列表项之间的间距，可以根据需要调整 */
+    list-style: none; /* 去掉列表项默认的样式 */
+    padding: 0; /* 去掉列表项的内边距 */
+    background-color: transparent;
+  }
+
+  .custom-scroll-view .custom-scroll-list .bg-image {
+    flex: 0 0 auto; /* 不要拉伸/收缩列表项 */
+    margin-right: 10px; /* 设置列表项之间的间距，可以根据需要调整 */
+    padding: 0px;
+    width: 23rem;
+    height: 12.95rem;
+    border-radius: 12px;
+  }
+</style>
