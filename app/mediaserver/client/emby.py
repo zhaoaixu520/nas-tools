@@ -520,7 +520,7 @@ class Emby(_IMediaClient):
       if not self._host or not self._apikey or not self._user:
           return []
       resume_medias = []
-      req_url = "%semby/Users/%s/Items/Resume?api_key=%s&Recursive=true" % (self._host, self._user, self._apikey)
+      req_url = "%semby/Users/%s/Items/Resume?api_key=%s&Recursive=true&EnableImageTypes=Primary,Thumb,Banner,Backdrop" % (self._host, self._user, self._apikey)
       try:
           res = RequestUtils().get_res(req_url)
           if res and res.status_code == 200:
@@ -541,11 +541,17 @@ class Emby(_IMediaClient):
         if not self._host or not self._apikey or not self._user:
             return []
         latest_medias = []
-        req_url = "%semby/Users/%s/Items/Latest?api_key=%s&Recursive=true&Limit=16&ImageTypeLimit=1&EnableImageTypes=Primary&ParentId=%s" % (self._host, self._user, self._apikey, parentId)
+        req_url = "%semby/Users/%s/Items/Latest?api_key=%s&Recursive=true&Limit=16&ImageTypeLimit=1&EnableImageTypes=Primary,Thumb,Banner,Backdrop&ParentId=%s" % (self._host, self._user, self._apikey, parentId)
         try:
             res = RequestUtils().get_res(req_url)
             if res and res.status_code == 200:
               latest_medias = res.json()
+              for resume_medias_data in latest_medias:
+                for key, value in resume_medias_data.get("ImageTags").items():
+                  resume_medias_data[f"{key}_image_url"] = "%semby/Items/%s/Images/%s?maxWidth=800&tag=%s&quality=90" % (self._host, resume_medias_data.get("Id"), key, value)
+            print("------------------------------")
+            print(latest_medias)
+            print("------------------------------")
             return latest_medias
         except Exception as e:
             ExceptionUtils.exception_traceback(e)

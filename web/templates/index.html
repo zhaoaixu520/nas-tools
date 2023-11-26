@@ -110,28 +110,36 @@
           <div class="custom-scroll-view">
             {% for AllMedia in AllMedias %}
               <button class="custom-scroll-list" >
-                  {% if AllMedia.Primary_image_url %}
+                  {% if AllMedia.Thumb_image_url %}
+                    <div class="bg-image" style="background-image: url('{{AllMedia.Thumb_image_url}}'); 
+                      background-repeat: no-repeat; 
+                      background-size: contain; 
+                      -webkit-background-size: contain; 
+                      -o-background-size: contain; 
+                      background-position: center 0;">
+                    </div>
+                  {% elif AllMedia.Primary_image_url %}
                     <div class="bg-image" style="background-image: url('{{AllMedia.Primary_image_url}}'); 
                       background-repeat: no-repeat; 
-                      background-size: cover; 
-                      -webkit-background-size: cover; 
-                      -o-background-size: cover; 
+                      background-size: contain; 
+                      -webkit-background-size: contain; 
+                      -o-background-size: contain; 
                       background-position: center 0;">
                     </div>
                   {% elif AllMedia.Banner_image_url %}
                     <div class="bg-image" style="background-image: url('{{AllMedia.Banner_image_url}}'); 
                       background-repeat: no-repeat; 
-                      background-size: cover; 
-                      -webkit-background-size: cover; 
-                      -o-background-size: cover; 
+                      background-size: contain; 
+                      -webkit-background-size: contain; 
+                      -o-background-size: contain; 
                       background-position: center 0;">
                     </div>
                   {% else %}
                     <div class="bg-image" style="background-image: url('../static/img/tv_bg.png'); 
                       background-repeat: no-repeat; 
-                      background-size: cover; 
-                      -webkit-background-size: cover; 
-                      -o-background-size: cover; 
+                      background-size: contain; 
+                      -webkit-background-size: contain; 
+                      -o-background-size: contain; 
                       background-position: center 0;">
                     </div>
                   {% endif %}
@@ -146,28 +154,36 @@
           <div class="custom-scroll-view">
             {% for ResumeMedia in ResumeMedias %}
             <button class="custom-scroll-list">
-              {% if ResumeMedia.Primary_image_url %}
+              {% if ResumeMedia.Thumb_image_url %}
+                <div class="bg-image" style="background-image: url('{{ResumeMedia.Thumb_image_url}}'); 
+                  background-repeat: no-repeat; 
+                  background-size: contain; 
+                  -webkit-background-size: contain; 
+                  -o-background-size: contain; 
+                  background-position: center 0;">
+                </div>
+              {% elif ResumeMedia.Primary_image_url %}
                 <div class="bg-image" style="background-image: url('{{ResumeMedia.Primary_image_url}}'); 
                   background-repeat: no-repeat; 
-                  background-size: cover; 
-                  -webkit-background-size: cover; 
-                  -o-background-size: cover; 
+                  background-size: contain; 
+                  -webkit-background-size: contain; 
+                  -o-background-size: contain; 
                   background-position: center 0;">
                 </div>
               {% elif ResumeMedia.Banner_image_url %}
                 <div class="bg-image" style="background-image: url('{{ResumeMedia.Banner_image_url}}'); 
                   background-repeat: no-repeat; 
-                  background-size: cover; 
-                  -webkit-background-size: cover; 
-                  -o-background-size: cover; 
+                  background-size: contain; 
+                  -webkit-background-size: contain; 
+                  -o-background-size: contain; 
                   background-position: center 0;">
                 </div>
               {% else %}
                 <div class="bg-image" style="background-image: url('../static/img/tv_bg.png'); 
                   background-repeat: no-repeat; 
-                  background-size: cover; 
-                  -webkit-background-size: cover; 
-                  -o-background-size: cover; 
+                  background-size: contain; 
+                  -webkit-background-size: contain; 
+                  -o-background-size: contain; 
                   background-position: center 0;">
                 </div>
               {% endif %}
@@ -190,12 +206,39 @@
           <div class="custom-scroll-view">
             {% for media in LatestMedia.data %}
             <button  class="custom-scroll-list">
-              <div class="bg-image" style="background-image: url(../static/img/tv_bg.png);
-              background-repeat: no-repeat;
-              background-size: cover;
-              -webkit-background-size: cover;
-              -o-background-size: cover;
-              background-position: center 0;"></div>
+              {% if media.Thumb_image_url %}
+                <div class="bg-image" style="background-image: url('{{media.Thumb_image_url}}'); 
+                  background-repeat: no-repeat; 
+                  background-size: contain; 
+                  -webkit-background-size: contain; 
+                  -o-background-size: contain; 
+                  background-position: center 0;">
+                </div>
+              {% elif media.Primary_image_url %}
+                <div class="bg-image" style="background-image: url('{{media.Primary_image_url}}'); 
+                  background-repeat: no-repeat; 
+                  background-size: contain; 
+                  -webkit-background-size: contain; 
+                  -o-background-size: contain; 
+                  background-position: center 0;">
+                </div>
+              {% elif media.Banner_image_url %}
+                <div class="bg-image" style="background-image: url('{{media.Banner_image_url}}'); 
+                  background-repeat: no-repeat; 
+                  background-size: contain; 
+                  -webkit-background-size: contain; 
+                  -o-background-size: contain; 
+                  background-position: center 0;">
+                </div>
+              {% else %}
+                <div class="bg-image" style="background-image: url('../static/img/tv_bg.png'); 
+                  background-repeat: no-repeat; 
+                  background-size: contain; 
+                  -webkit-background-size: contain; 
+                  -o-background-size: contain; 
+                  background-position: center 0;">
+                </div>
+              {% endif %}
               <p style="margin-top: 4px; 
                 overflow: hidden;
                 white-space: nowrap; 
@@ -510,5 +553,6 @@
     width: 23rem;
     height: 12.95rem;
     border-radius: 12px;
+    background-color: rgba(0,0,0,0.3);
   }
 </style>
