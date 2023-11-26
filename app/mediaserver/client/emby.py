@@ -503,6 +503,10 @@ class Emby(_IMediaClient):
             res = RequestUtils().get_res(req_url)
             if res and res.status_code == 200:
                 all_medias = res.json()
+                resume_medias_datas = all_medias.get("Items")
+                for resume_medias_data in resume_medias_datas:
+                  for key, value in resume_medias_data.get("ImageTags").items():
+                    resume_medias_data[f"{key}_image_url"] = "%semby/Items/%s/Images/%s?maxWidth=800&tag=%s&quality=90" % (self._host, resume_medias_data.get("Id"), key, value)
             return all_medias
         except Exception as e:
             ExceptionUtils.exception_traceback(e)
