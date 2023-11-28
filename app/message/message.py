@@ -78,8 +78,14 @@ class Message(object):
         for message_schema in self._message_schemas:
             try:
                 if message_schema.match(ctype):
+                    print("==message_schema====")
+                    print(message_schema)
+                    print("==message_schema====")
                     return message_schema(conf)
             except Exception as e:
+                print("==Exception====")
+                print(e)
+                print("==Exception====")
                 ExceptionUtils.exception_traceback(e)
         return None
 

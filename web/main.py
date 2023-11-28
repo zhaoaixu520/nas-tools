@@ -206,15 +206,22 @@ def index():
     else:
         ServerSucess = False
 
+    # 获取服务器信息
+    MediaServer = WebAction().get_server()
+
     # 获得活动日志
     Activity = WebAction().get_library_playhistory().get("result")
 
 
     # 获得所有媒体列表
     AllMedias = WebAction().get_all_medias()
+    # print("=====================")
+    # print(AllMedias.get('data'))
+    # print("=====================")
 
     # 获取继续观看媒体列表
     ResumeMedias = WebAction().get_resume_medias()
+    # print(ResumeMedias.get('data'))
 
     # 获取最新未播放的媒体列表
     LatestMedias = []
@@ -224,6 +231,8 @@ def index():
       for i, allMedias in enumerate(all_medias):
           if WebAction().get_latest_media_List(allMedias.get('Id')).get("code") == 0:
             LatestMedias.append({"name":allMedias.get("Name"),"data":WebAction().get_latest_media_List(allMedias.get('Id')).get("data")})
+
+    # print(LatestMedias)
 
     # 磁盘空间
     LibrarySpaces = WebAction().get_library_spacesize()
@@ -251,7 +260,8 @@ def index():
                            MediaServerType=MSType,
                            AllMedias=AllMedias.get('data'),
                            ResumeMedias=ResumeMedias.get('data'),
-                           LatestMedias=LatestMedias
+                           LatestMedias=LatestMedias,
+                           MediaServer=MediaServer,
                            )
 
 
@@ -1179,11 +1189,18 @@ def do():
     try:
         cmd = request.form.get("cmd")
         data = request.form.get("data")
+        print("===data======")
+        print(data)
+        print("===data======")
     except Exception as e:
         ExceptionUtils.exception_traceback(e)
         return {"code": -1, "msg": str(e)}
     if data:
         data = json.loads(data)
+        print("===data1======")
+        print(data)
+        print(cmd)
+        print("===data1======")
     return WebAction().action(cmd, data)
 
 

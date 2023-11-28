@@ -1,8 +1,5 @@
 FROM alpine
 
-# ENV http_proxy=http://127.0.0.1:1087
-# ENV https_proxy=http://127.0.0.1:1087
-
 ENV LANG="C.UTF-8" \
     TZ="Asia/Shanghai" \
     NASTOOL_CONFIG="/config/config.yaml" \

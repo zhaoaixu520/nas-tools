@@ -549,10 +549,13 @@ class Emby(_IMediaClient):
               for resume_medias_data in latest_medias:
                 for key, value in resume_medias_data.get("ImageTags").items():
                   resume_medias_data[f"{key}_image_url"] = "%semby/Items/%s/Images/%s?maxWidth=800&tag=%s&quality=90" % (self._host, resume_medias_data.get("Id"), key, value)
-            print("------------------------------")
-            print(latest_medias)
-            print("------------------------------")
             return latest_medias
         except Exception as e:
             ExceptionUtils.exception_traceback(e)
         return []
+    
+    def get_server_info(self):
+        serverInfo = {
+            "host": self._host
+        }
+        return serverInfo

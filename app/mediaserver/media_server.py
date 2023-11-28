@@ -268,3 +268,11 @@ class MediaServer:
         if not self.server:
             return None
         return self.server.get_latest_media_List(parentId)
+    
+    def get_server_info(self):
+        """
+        获取服务器信息
+        """
+        if not self.server:
+            return None
+        return self.server.get_server_info()

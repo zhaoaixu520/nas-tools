@@ -212,6 +212,11 @@ class WebAction:
 
     def action(self, cmd, data=None):
         func = self._actions.get(cmd)
+        print("func=============")
+        
+        print(func)
+        print(cmd)
+        print("func=============")
         if not func:
             return {"code": -1, "msg": "非授权访问！"}
         else:
@@ -3495,6 +3500,15 @@ class WebAction:
             }
 
     @staticmethod
+    def get_server():
+        """
+        获取服务器信息
+        """
+        MediaServerClient = MediaServer()
+        get_server = MediaServerClient.get_server_info()
+        return get_server
+
+    @staticmethod
     def get_resume_medias():
         """
         获取继续观看媒体列表
@@ -4260,6 +4274,10 @@ class WebAction:
         """
         ctype = data.get("type")
         config = json.loads(data.get("config"))
+        print("==config==========")
+        print(config)
+        print(ctype)
+        print("==config==========")
         res = Message().get_status(ctype=ctype, config=config)
         if res:
             return {"code": 0}

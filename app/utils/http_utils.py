@@ -10,7 +10,7 @@ class RequestUtils:
     _headers = None
     _cookies = None
     _proxies = None
-    _timeout = 20
+    _timeout = 60
     _session = None
 
     def __init__(self,
@@ -96,8 +96,17 @@ class RequestUtils:
             return None
 
     def get_res(self, url, params=None, allow_redirects=True):
+        print("=====================")
+        print(url)
+        print(self._session)
+        print(self)
+        print("=====================")
         try:
             if self._session:
+                print("=====================")
+                print("_session")
+                print(params)
+                print("=====================")
                 return self._session.get(url,
                                          params=params,
                                          verify=False,
@@ -107,6 +116,10 @@ class RequestUtils:
                                          timeout=self._timeout,
                                          allow_redirects=allow_redirects)
             else:
+                print("=====================")
+                print("requests")
+                print(params)
+                print("=====================")
                 return requests.get(url,
                                     params=params,
                                     verify=False,

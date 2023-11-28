@@ -109,7 +109,7 @@
           <h2>我的媒体</h2>
           <div class="custom-scroll-view">
             {% for AllMedia in AllMedias %}
-              <button class="custom-scroll-list" >
+              <button class="custom-scroll-list" onclick="openMediaPage('{{ MediaServer.host }}', '{{ AllMedia.Id }}', '{{ AllMedia.ServerId }}', '{{ AllMedia.CollectionType }}')">
                   {% if AllMedia.Thumb_image_url %}
                     <div class="bg-image" style="background-image: url('{{AllMedia.Thumb_image_url}}'); 
                       background-repeat: no-repeat; 
@@ -153,7 +153,7 @@
           <h2>继续观看</h2>
           <div class="custom-scroll-view">
             {% for ResumeMedia in ResumeMedias %}
-            <button class="custom-scroll-list">
+            <a class="custom-scroll-list" href="{{ MediaServer.host }}web/index.html#!/item?id={{ ResumeMedia.Id }}&serverId={{ ResumeMedia.ServerId }}`" target="_blank">
               {% if ResumeMedia.Thumb_image_url %}
                 <div class="bg-image" style="background-image: url('{{ResumeMedia.Thumb_image_url}}'); 
                   background-repeat: no-repeat; 
@@ -194,7 +194,7 @@
                 width: 23rem; ">
                 {{ ResumeMedia.Name }}
               </p>
-            </button>
+            </a>
             {% endfor %}
           </div>
         </div>
@@ -205,7 +205,7 @@
           <h2>{{ LatestMedia.name }}</h2>
           <div class="custom-scroll-view">
             {% for media in LatestMedia.data %}
-            <button  class="custom-scroll-list">
+            <button  class="custom-scroll-list" onclick="openNewPage('{{ MediaServer.host }}', '{{ media.Id }}', '{{ media.ServerId }}')">
               {% if media.Thumb_image_url %}
                 <div class="bg-image" style="background-image: url('{{media.Thumb_image_url}}'); 
                   background-repeat: no-repeat; 
@@ -507,6 +507,31 @@
     }, true, false);
   }
 
+</script>
+
+<!-- JavaScript 部分 -->
+<script type="text/javascript">
+  function openNewPage(host, id, serverId) {
+      // 生成链接
+      var link = `${host}web/index.html#!/item?id=${id}&serverId=${serverId}`;
+
+      // 在新窗口中打开链接
+      window.open(link, '_blank');
+  }
+  function openMediaPage(host, id, serverId, collectionType) {
+    
+    var link = `${host}web/index.html#!/videos?parentId=${id}&serverId=${serverId}`;
+    if (collectionType === "music" ) {
+      link = `${host}web/index.html#!/music?parentId=${id}&serverId=${serverId}`;
+    } 
+      // 生成链接
+      
+      // http://192.168.194.103:8096/web/index.html#!/videos?serverId=2da43fad62214632b4413c10c177ae76&parentId=4
+
+
+      // 在新窗口中打开链接
+      window.open(link, '_blank');
+  }
 </script>
 
 <style>
