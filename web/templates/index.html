@@ -109,42 +109,85 @@
           <h2>我的媒体</h2>
           <div class="custom-scroll-view">
             {% for AllMedia in AllMedias %}
-              <button class="custom-scroll-list" onclick="openMediaPage('{{ MediaServer.host }}', '{{ AllMedia.Id }}', '{{ AllMedia.ServerId }}', '{{ AllMedia.CollectionType }}')">
-                  {% if AllMedia.Thumb_image_url %}
-                    <div class="bg-image" style="background-image: url('{{AllMedia.Thumb_image_url}}'); 
-                      background-repeat: no-repeat; 
-                      background-size: contain; 
-                      -webkit-background-size: contain; 
-                      -o-background-size: contain; 
-                      background-position: center 0;">
-                    </div>
-                  {% elif AllMedia.Primary_image_url %}
-                    <div class="bg-image" style="background-image: url('{{AllMedia.Primary_image_url}}'); 
-                      background-repeat: no-repeat; 
-                      background-size: contain; 
-                      -webkit-background-size: contain; 
-                      -o-background-size: contain; 
-                      background-position: center 0;">
-                    </div>
-                  {% elif AllMedia.Banner_image_url %}
-                    <div class="bg-image" style="background-image: url('{{AllMedia.Banner_image_url}}'); 
-                      background-repeat: no-repeat; 
-                      background-size: contain; 
-                      -webkit-background-size: contain; 
-                      -o-background-size: contain; 
-                      background-position: center 0;">
-                    </div>
-                  {% else %}
-                    <div class="bg-image" style="background-image: url('../static/img/tv_bg.png'); 
-                      background-repeat: no-repeat; 
-                      background-size: contain; 
-                      -webkit-background-size: contain; 
-                      -o-background-size: contain; 
-                      background-position: center 0;">
-                    </div>
-                  {% endif %}
-                <p style="margin-top: 4px;">{{ AllMedia.Name }}</p>
-              </button>
+              {% if AllMedia.CollectionType == 'music' %}
+                <a class="custom-scroll-list" 
+                  href="{{ MediaServer.host }}web/index.html#!/music?parentId={{ AllMedia.Id }}&serverId={{ AllMedia.ServerId }}" target="_blank"
+                >
+                    {% if AllMedia.Thumb_image_url %}
+                      <div class="bg-image" style="background-image: url('{{AllMedia.Thumb_image_url}}'); 
+                        background-repeat: no-repeat; 
+                        background-size: contain; 
+                        -webkit-background-size: contain; 
+                        -o-background-size: contain; 
+                        background-position: center 0;">
+                      </div>
+                    {% elif AllMedia.Primary_image_url %}
+                      <div class="bg-image" style="background-image: url('{{AllMedia.Primary_image_url}}'); 
+                        background-repeat: no-repeat; 
+                        background-size: contain; 
+                        -webkit-background-size: contain; 
+                        -o-background-size: contain; 
+                        background-position: center 0;">
+                      </div>
+                    {% elif AllMedia.Banner_image_url %}
+                      <div class="bg-image" style="background-image: url('{{AllMedia.Banner_image_url}}'); 
+                        background-repeat: no-repeat; 
+                        background-size: contain; 
+                        -webkit-background-size: contain; 
+                        -o-background-size: contain; 
+                        background-position: center 0;">
+                      </div>
+                    {% else %}
+                      <div class="bg-image" style="background-image: url('../static/img/tv_bg.png'); 
+                        background-repeat: no-repeat; 
+                        background-size: contain; 
+                        -webkit-background-size: contain; 
+                        -o-background-size: contain; 
+                        background-position: center 0;">
+                      </div>
+                    {% endif %}
+                  <p style="margin-top: 4px;">{{ AllMedia.Name }}</p>
+                </a>
+              {% else %}
+                <a class="custom-scroll-list" 
+                  href="{{ MediaServer.host }}web/index.html#!/videos?parentId={{ AllMedia.Id }}&serverId={{ AllMedia.ServerId }}" target="_blank"
+                >
+                    {% if AllMedia.Thumb_image_url %}
+                      <div class="bg-image" style="background-image: url('{{AllMedia.Thumb_image_url}}'); 
+                        background-repeat: no-repeat; 
+                        background-size: contain; 
+                        -webkit-background-size: contain; 
+                        -o-background-size: contain; 
+                        background-position: center 0;">
+                      </div>
+                    {% elif AllMedia.Primary_image_url %}
+                      <div class="bg-image" style="background-image: url('{{AllMedia.Primary_image_url}}'); 
+                        background-repeat: no-repeat; 
+                        background-size: contain; 
+                        -webkit-background-size: contain; 
+                        -o-background-size: contain; 
+                        background-position: center 0;">
+                      </div>
+                    {% elif AllMedia.Banner_image_url %}
+                      <div class="bg-image" style="background-image: url('{{AllMedia.Banner_image_url}}'); 
+                        background-repeat: no-repeat; 
+                        background-size: contain; 
+                        -webkit-background-size: contain; 
+                        -o-background-size: contain; 
+                        background-position: center 0;">
+                      </div>
+                    {% else %}
+                      <div class="bg-image" style="background-image: url('../static/img/tv_bg.png'); 
+                        background-repeat: no-repeat; 
+                        background-size: contain; 
+                        -webkit-background-size: contain; 
+                        -o-background-size: contain; 
+                        background-position: center 0;">
+                      </div>
+                    {% endif %}
+                  <p style="margin-top: 4px;">{{ AllMedia.Name }}</p>
+                </a>
+              {% endif %}
             {% endfor %}
           </div>
         </div>
@@ -153,7 +196,7 @@
           <h2>继续观看</h2>
           <div class="custom-scroll-view">
             {% for ResumeMedia in ResumeMedias %}
-            <a class="custom-scroll-list" href="{{ MediaServer.host }}web/index.html#!/item?id={{ ResumeMedia.Id }}&serverId={{ ResumeMedia.ServerId }}`" target="_blank">
+            <a class="custom-scroll-list" href="{{ MediaServer.host }}web/index.html#!/item?id={{ ResumeMedia.Id }}&serverId={{ ResumeMedia.ServerId }}" target="_blank">
               {% if ResumeMedia.Thumb_image_url %}
                 <div class="bg-image" style="background-image: url('{{ResumeMedia.Thumb_image_url}}'); 
                   background-repeat: no-repeat; 
@@ -205,7 +248,7 @@
           <h2>{{ LatestMedia.name }}</h2>
           <div class="custom-scroll-view">
             {% for media in LatestMedia.data %}
-            <button  class="custom-scroll-list" onclick="openNewPage('{{ MediaServer.host }}', '{{ media.Id }}', '{{ media.ServerId }}')">
+            <a  class="custom-scroll-list" href="{{ MediaServer.host }}web/index.html#!/item?id={{ media.Id }}&serverId={{ media.ServerId }}" target="_blank">
               {% if media.Thumb_image_url %}
                 <div class="bg-image" style="background-image: url('{{media.Thumb_image_url}}'); 
                   background-repeat: no-repeat; 
@@ -246,7 +289,7 @@
                 width: 23rem; ">
                 {{ media.Name }}
               </p>
-            </button>
+            </a>
             {% endfor %}
          </div>
         </div>
@@ -511,13 +554,6 @@
 
 <!-- JavaScript 部分 -->
 <script type="text/javascript">
-  function openNewPage(host, id, serverId) {
-      // 生成链接
-      var link = `${host}web/index.html#!/item?id=${id}&serverId=${serverId}`;
-
-      // 在新窗口中打开链接
-      window.open(link, '_blank');
-  }
   function openMediaPage(host, id, serverId, collectionType) {
     
     var link = `${host}web/index.html#!/videos?parentId=${id}&serverId=${serverId}`;
@@ -565,10 +601,13 @@
     display: flex; /* 使用 Flex 布局 */
     flex-direction: column;
     align-items: center;
+    text-align: center;
     margin-right: 10px; /* 设置列表项之间的间距，可以根据需要调整 */
     list-style: none; /* 去掉列表项默认的样式 */
     padding: 0; /* 去掉列表项的内边距 */
     background-color: transparent;
+    text-decoration: none; /* 去除下划线 */
+    color: inherit;
   }
 
   .custom-scroll-view .custom-scroll-list .bg-image {
