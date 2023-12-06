@@ -96,6 +96,9 @@ class Message(object):
         if not config or not ctype:
             return False
         # 测试状态不启动监听服务
+        print("------------")
+        print(config)
+        print("------------")
         state, ret_msg = self.__build_class(ctype=ctype,
                                             conf=config).send_msg(title="测试",
                                                                   text="这是一条测试消息",

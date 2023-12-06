@@ -128,7 +128,10 @@ class RequestUtils:
                                     cookies=self._cookies,
                                     timeout=self._timeout,
                                     allow_redirects=allow_redirects)
-        except requests.exceptions.RequestException:
+        except requests.exceptions.RequestException as err:
+            print("===RequestException==================")
+            print(err)
+            print("===RequestException==================")
             return None
 
     def post_res(self, url, params=None, allow_redirects=True, files=None, json=None):

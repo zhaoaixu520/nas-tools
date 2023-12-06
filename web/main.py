@@ -1190,21 +1190,30 @@ def rss_parser():
 @action_login_check
 def do():
     try:
-        cmd = request.form.get("cmd")
-        data = request.form.get("data")
-        print("===data======")
-        print(data)
-        print("===data======")
+        content = request.get_json()
+        cmd = content.get("cmd")
+        data = content.get("data") or {}
+        return WebAction().action(cmd, data)
     except Exception as e:
         ExceptionUtils.exception_traceback(e)
         return {"code": -1, "msg": str(e)}
-    if data:
-        data = json.loads(data)
-        print("===data1======")
-        print(data)
-        print(cmd)
-        print("===data1======")
-    return WebAction().action(cmd, data)
+# def do():
+#     try:
+#         cmd = request.form.get("cmd")
+#         data = request.form.get("data")
+#         print("===data======")
+#         print(data)
+#         print("===data======")
+#     except Exception as e:
+#         ExceptionUtils.exception_traceback(e)
+#         return {"code": -1, "msg": str(e)}
+#     if data:
+#         data = json.loads(data)
+#         print("===data1======")
+#         print(data)
+#         print(cmd)
+#         print("===data1======")
+#     return WebAction().action(cmd, data)
 
 
 # 目录事件响应

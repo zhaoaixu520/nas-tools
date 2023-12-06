@@ -37,6 +37,9 @@ class Slack(_IMessageClient):
         self._ds_url = "http://127.0.0.1:%s/slack?apikey=%s" % (_web_port, _api_key)
         if self._client_config:
             try:
+                print("--bot_token-----------")
+                print(self._client_config.get("bot_token"))
+                print("--bot_token-----------")
                 slack_app = App(token=self._client_config.get("bot_token"))
             except Exception as err:
                 ExceptionUtils.exception_traceback(err)

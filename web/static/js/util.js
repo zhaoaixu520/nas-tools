@@ -12,7 +12,7 @@ function ajax_post(cmd, params, handler, aync=true, show_progress=true) {
     console.log('==params==================================');
     let data = {
         cmd: cmd,
-        data: JSON.stringify(params)
+        data: params
     };
     console.log('==data==================================');
     console.log(data);
@@ -21,7 +21,8 @@ function ajax_post(cmd, params, handler, aync=true, show_progress=true) {
         type: "POST",
         url: "do?random=" + Math.random(),
         dataType: "json",
-        data: data,
+        contentType: 'application/json',
+        data: JSON.stringify(data),
         cache: false,
         async: aync,
         timeout: 0,
