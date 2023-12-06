@@ -12,7 +12,7 @@ from app.utils import SystemUtils, RequestUtils
 
 lock = Lock()
 
-driver_executable_path = None
+driver_executable_path = "/usr/local/bin"
 
 
 class ChromeHelper(object):

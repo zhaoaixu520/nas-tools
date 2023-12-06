@@ -108,7 +108,7 @@ def singleconfig(cls):
 @singleconfig
 class Config(object):
     _config = {}
-    _config_path = None
+    _config_path = "config/config.yaml"
 
     def __init__(self):
         self._config_path = os.environ.get('NASTOOL_CONFIG')
@@ -120,6 +120,7 @@ class Config(object):
     def init_config(self):
         try:
             if not self._config_path:
+                print(self._config_path)
                 print("【Config】NASTOOL_CONFIG 环境变量未设置，程序无法工作，正在退出...")
                 quit()
             if not os.path.exists(self._config_path):
