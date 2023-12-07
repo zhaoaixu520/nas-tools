@@ -290,6 +290,9 @@ class WebAction:
         }
         command = commands.get(msg)
         message = Message()
+        print("===message===")
+        print(message)
+        print("===message===")
 
         if command:
             # 启动服务

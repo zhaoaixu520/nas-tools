@@ -28,6 +28,9 @@ class Slack(_IMessageClient):
         self._config = Config()
         self._client_config = config
         self._interactive = config.get("interactive")
+        print("---------interactive----")
+        print(config.get("interactive"))
+        print("---------interactive----")
         self._channel = config.get("channel") or "全体"
         self.init_config()
 
@@ -35,14 +38,23 @@ class Slack(_IMessageClient):
         _web_port = self._config.get_config("app").get("web_port")
         _api_key = self._config.get_config("security").get("api_key")
         self._ds_url = "http://127.0.0.1:%s/slack?apikey=%s" % (_web_port, _api_key)
+        print("--_ds_url-----------")
+        print(self._ds_url)
+        print("--_ds_url-----------")
         if self._client_config:
             try:
                 print("--bot_token-----------")
                 print(self._client_config.get("bot_token"))
                 print("--bot_token-----------")
                 slack_app = App(token=self._client_config.get("bot_token"))
+                print("--slack_app-----------")
+                print(slack_app)
+                print("--slack_app-----------")
             except Exception as err:
                 ExceptionUtils.exception_traceback(err)
+                print("--slack_app----err-------")
+                print(err)
+                print("--slack_app----err-------")
                 return
             self._client = slack_app.client
 
