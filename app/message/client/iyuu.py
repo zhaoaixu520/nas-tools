@@ -41,7 +41,7 @@ class IyuuMsg(_IMessageClient):
             print("send_msg")
             print(sc_url)
             print("=====================")
-            res = RequestUtils().get_res(sc_url)
+            res = RequestUtils().get_res(sc_url, None, False)
             if res:
                 
                 ret_json = res.json()

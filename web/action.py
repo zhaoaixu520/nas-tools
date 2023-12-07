@@ -4226,6 +4226,7 @@ class WebAction:
                                             interactive=interactive,
                                             enabled=enabled)
         Message().init_config()
+        print("-------1--------")
         return {"code": 0}
 
     def __delete_message_client(self, data):
@@ -4234,6 +4235,7 @@ class WebAction:
         """
         if self.dbhelper.delete_message_client(cid=data.get("cid")):
             Message().init_config()
+            print("-------2--------")
             return {"code": 0}
         else:
             return {"code": 1}
@@ -4253,11 +4255,13 @@ class WebAction:
             self.dbhelper.check_message_client(cid=cid,
                                                interactive=1 if checked else 0)
             Message().init_config()
+            print("-------3--------")
             return {"code": 0}
         elif flag == "enable":
             self.dbhelper.check_message_client(cid=cid,
                                                enabled=1 if checked else 0)
             Message().init_config()
+            print("-------4--------")
             return {"code": 0}
         else:
             return {"code": 1}

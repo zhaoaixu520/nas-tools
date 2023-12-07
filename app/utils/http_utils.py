@@ -119,6 +119,10 @@ class RequestUtils:
                 print("=====================")
                 print("requests")
                 print(params)
+                print(self._headers)
+                print(self._proxies)
+                print(self._cookies)
+                print(self._timeout)
                 print("=====================")
                 return requests.get(url,
                                     params=params,
