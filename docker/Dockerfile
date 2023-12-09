@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.15
 
 ENV LANG="C.UTF-8" \
     TZ="Asia/Shanghai" \
@@ -15,7 +15,7 @@ ENV LANG="C.UTF-8" \
     UMASK=000 \
     WORKDIR="/nas-tools"
 
-RUN apk add --no-cache bash \
+RUN apk add bash \
     fuse \
     libffi-dev \
     # && apk add --no-cache $(echo $(wget --no-check-certificate -qO- https://raw.githubusercontent.com/zhaoaixu520/nas-tools/v2.9.1-e3a43d4/package_list.txt)) \
