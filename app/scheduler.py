@@ -196,14 +196,18 @@ class Scheduler:
         self.SCHEDULER.add_job(MetaHelper().delete_unknown_meta, 'interval', hours=META_DELETE_UNKNOWN_INTERVAL)
 
         # 定时刷新壁纸
-        self.SCHEDULER.add_job(get_login_wallpaper,
-                               'interval',
-                               hours=REFRESH_WALLPAPER_INTERVAL,
-                               next_run_time=datetime.datetime.now())
+        if self._is_scheduler_valid():
+            self.SCHEDULER.add_job(get_login_wallpaper, 'interval', hours=REFRESH_WALLPAPER_INTERVAL, next_run_time=datetime.datetime.now())
+        else:
+            log.error("【SCHEDULE】get_login_wallpaper 任务调度器未成功初始化或已关闭，无法添加新任务")
+
 
         self.SCHEDULER.print_jobs()
 
         self.SCHEDULER.start()
+
+    def _is_scheduler_valid(self):
+        return self.SCHEDULER and not self.SCHEDULER.state == 'shutdown'
 
     def stop_service(self):
         """

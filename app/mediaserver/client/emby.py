@@ -4,7 +4,7 @@ import re
 import log
 from config import Config
 from app.mediaserver.client._base import _IMediaClient
-from app.utils import RequestUtils, SystemUtils, ExceptionUtils
+from app.utils import RequestUtils, SystemUtils, ExceptionUtils, IpUtils
 from app.utils.types import MediaType, MediaServerType
 
 
@@ -273,6 +273,33 @@ class Emby(_IMediaClient):
             return None
         total_episodes = [episode for episode in range(1, total_num + 1)]
         return list(set(total_episodes).difference(set(exists_episodes)))
+    
+    def __get_backdrop_url(self, item_id, image_tag, key, remote=True, inner=False):
+        """
+        获取Backdrop图片地址
+        :param: item_id: 在Emby中的ID
+        :param: image_tag: 图片的tag
+        :param: remote 是否远程使用，TG微信等客户端调用应为True
+        :param: inner 是否NT内部调用，为True是会使用NT中转
+        """
+        if not self._host or not self._apikey:
+            return ""
+        if not image_tag or not item_id:
+            return ""
+        if not remote:
+            # %semby/Items/%s/Images/%s?maxWidth=800&tag=%s&quality=90
+            image_url = f"{self._host}emby/Items/{item_id}/"\
+                        f"Images/{key}?tag={image_tag}&maxWidth=800&quality=90"
+            if inner:
+                return self.get_nt_image_url(image_url)
+            return image_url
+        else:
+            host = self._host or self._host
+            image_url = f"{self._host}emby/Items/{item_id}/"\
+                        f"Images/{key}?tag={image_tag}&maxWidth=800&quality=90"
+            if IpUtils.is_internal(host):
+                return self.get_nt_image_url(url=image_url, remote=True)
+            return image_url
 
     def get_image_by_id(self, item_id, image_type):
         """
@@ -506,11 +533,39 @@ class Emby(_IMediaClient):
                 resume_medias_datas = all_medias.get("Items")
                 for resume_medias_data in resume_medias_datas:
                   for key, value in resume_medias_data.get("ImageTags").items():
-                    resume_medias_data[f"{key}_image_url"] = "%semby/Items/%s/Images/%s?maxWidth=800&tag=%s&quality=90" % (self._host, resume_medias_data.get("Id"), key, value)
+                    # resume_medias_data[f"{key}_image_url"] = "%semby/Items/%s/Images/%s?maxWidth=800&tag=%s&quality=90" % (self._host, resume_medias_data.get("Id"), key, value)
+                    resume_medias_data[f"{key}_image_url"] = self.get_local_image_by_id(resume_medias_data.get("Id"), key=key,image_tag=value, remote=False, inner=True)  #"%semby/Items/%s/Images/%s?maxWidth=800&tag=%s&quality=90" % (self._host, resume_medias_data.get("Id"), key, value)
+                    # resume_medias_data[f"{key}_image_url"] = self.__get_backdrop_url(item_id=resume_medias_data.get("Id"),
+                    #                                         image_tag=value,
+                    #                                         key=key,
+                    #                                         remote=False,
+                    #                                         inner=True)
             return all_medias
         except Exception as e:
             ExceptionUtils.exception_traceback(e)
             return []
+
+    def get_local_image_by_id(self, item_id, key, image_tag, remote=True, inner=False):
+        """
+        根据ItemId从媒体服务器查询本地图片地址
+        :param: item_id: 在Emby中的ID
+        :param: remote 是否远程使用，TG微信等客户端调用应为True
+        :param: inner 是否NT内部调用，为True是会使用NT中转
+        """
+        if not self._host or not self._apikey:
+            return None
+        if not remote:
+            image_url = "%semby/Items/%s/Images/%s?tag=%s&maxWidth=800&quality=90" % (self._host, item_id, key, image_tag) 
+            if inner:
+                return self.get_nt_image_url(image_url)
+            return image_url
+        else:
+            host = self._host
+            image_url = "%semby/Items/%s/Images/%s?tag=%s&maxWidth=800&quality=90" % (self._host, item_id, key, image_tag) 
+            if IpUtils.is_internal(host):
+                return self.get_nt_image_url(url=image_url, remote=True)
+            return image_url
+
 
 
     def get_resume_medias(self):
@@ -528,7 +583,12 @@ class Emby(_IMediaClient):
               resume_medias_datas = resume_medias.get("Items")
               for resume_medias_data in resume_medias_datas:
                   for key, value in resume_medias_data.get("ImageTags").items():
-                    resume_medias_data[f"{key}_image_url"] = "%semby/Items/%s/Images/%s?maxWidth=800&tag=%s&quality=90" % (self._host, resume_medias_data.get("Id"), key, value)
+                    # resume_medias_data[f"{key}_image_url"] = "%semby/Items/%s/Images/%s?maxWidth=800&tag=%s&quality=90" % (self._host, resume_medias_data.get("Id"), key, value)
+                    resume_medias_data[f"{key}_image_url"] = self.__get_backdrop_url(item_id=resume_medias_data.get("Id"),
+                                                            image_tag=value,
+                                                            key=key,
+                                                            remote=False,
+                                                            inner=True)
           return resume_medias
       except Exception as e:
           ExceptionUtils.exception_traceback(e)
@@ -548,7 +608,12 @@ class Emby(_IMediaClient):
               latest_medias = res.json()
               for resume_medias_data in latest_medias:
                 for key, value in resume_medias_data.get("ImageTags").items():
-                  resume_medias_data[f"{key}_image_url"] = "%semby/Items/%s/Images/%s?maxWidth=800&tag=%s&quality=90" % (self._host, resume_medias_data.get("Id"), key, value)
+                  # resume_medias_data[f"{key}_image_url"] = "%semby/Items/%s/Images/%s?maxWidth=800&tag=%s&quality=90" % (self._host, resume_medias_data.get("Id"), key, value)
+                  resume_medias_data[f"{key}_image_url"] = self.__get_backdrop_url(item_id=resume_medias_data.get("Id"),
+                                                            image_tag=value,
+                                                            key=key,
+                                                            remote=False,
+                                                            inner=True)
             return latest_medias
         except Exception as e:
             ExceptionUtils.exception_traceback(e)

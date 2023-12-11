@@ -1,4 +1,6 @@
 from abc import ABCMeta, abstractmethod
+from urllib.parse import quote
+from config import Config
 
 
 class _IMediaClient(metaclass=ABCMeta):
@@ -106,3 +108,21 @@ class _IMediaClient(metaclass=ABCMeta):
         获取正在播放的会话
         """
         pass
+    
+    @staticmethod
+    def get_nt_image_url(url, remote=False):
+        """
+        获取NT中转内网图片的地址
+        :param: url: 图片的URL
+        :param: remote: 是否需要返回完整的URL
+        """
+        if not url:
+            return ""
+        if remote:
+            domain = Config().get_domain()
+            if domain:
+                return f"{domain}/img?url={quote(url)}"
+            else:
+                return ""
+        else:
+            return f"img?url={quote(url)}"

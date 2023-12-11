@@ -1,5 +1,6 @@
 import base64
 import datetime
+import hashlib
 import os.path
 import re
 import shutil
@@ -14,7 +15,7 @@ from pathlib import Path
 from threading import Lock
 from urllib import parse
 
-from flask import Flask, request, json, render_template, make_response, session, send_from_directory, send_file
+from flask import Flask, request, json, render_template, make_response, session, send_from_directory, send_file, Response
 from flask_compress import Compress
 from flask_login import LoginManager, login_user, login_required, current_user
 
@@ -215,15 +216,15 @@ def index():
 
     # 获得所有媒体列表
     AllMedias = WebAction().get_all_medias()
-    # print("==AllMedias===================")
-    # print(AllMedias.get('data'))
-    # print("==AllMedias===================")
+    print("==AllMedias===================")
+    print(AllMedias.get('data'))
+    print("==AllMedias===================")
 
     # 获取继续观看媒体列表
     ResumeMedias = WebAction().get_resume_medias()
-    # print("==ResumeMedias===================")
-    # print(ResumeMedias.get('data'))
-    # print("==ResumeMedias===================")
+    print("==ResumeMedias===================")
+    print(ResumeMedias.get('data'))
+    print("==ResumeMedias===================")
 
     # 获取最新未播放的媒体列表
     LatestMedias = []
@@ -233,9 +234,9 @@ def index():
       for i, allMedias in enumerate(all_medias):
           if WebAction().get_latest_media_List(allMedias.get('Id')).get("code") == 0:
             LatestMedias.append({"name":allMedias.get("Name"),"data":WebAction().get_latest_media_List(allMedias.get('Id')).get("data")})
-    # print("==LatestMedias===================")
-    # print(LatestMedias)
-    # print("==LatestMedias===================")
+    print("==LatestMedias===================")
+    print(LatestMedias)
+    print("==LatestMedias===================")
 
     # 磁盘空间
     LibrarySpaces = WebAction().get_library_spacesize()
@@ -1806,3 +1807,32 @@ def str_filesize(size):
 @App.template_filter('hash')
 def md5_hash(text):
     return StringUtils.md5_hash(text)
+
+@App.route('/img')
+@login_required
+def Img():
+    """
+    图片中换服务
+    """
+    url = request.args.get('url')
+    if not url:
+        return make_response("参数错误", 400)
+    # 计算Etag
+    etag = hashlib.sha256(url.encode('utf-8')).hexdigest()
+    # 检查协商缓存
+    if_none_match = request.headers.get('If-None-Match')
+    if if_none_match and if_none_match == etag:
+        return make_response('', 304)
+    
+    # 获取图片数据
+    try:
+      img = WebUtils.request_cache(url)
+      response = Response(
+          img,
+          mimetype='image/jpeg'
+      )
+      response.headers.set('Cache-Control', 'max-age=604800')
+      response.headers.set('Etag', etag)
+      return response
+    except:
+      return make_response("图片加载失败", 400)
