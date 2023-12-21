@@ -57,7 +57,7 @@ def __get_bing_wallpaper(today):
     print(url)
     print("=============__get_bing_wallpaper====")
     try:
-        resp = RequestUtils(timeout=5).get_res(url)
+        resp = RequestUtils(timeout=60).get_res(url)
     except Exception as err:
         ExceptionUtils.exception_traceback(err)
         print("===========wallpaper==err====")
@@ -71,4 +71,8 @@ def __get_bing_wallpaper(today):
         if resp.json():
             for image in resp.json().get('images') or []:
                 return f"https://cn.bing.com{image.get('url')}"
+    else:
+        print("-------------resp")
+        print(resp)
+        print("-------------resp")
     return ""
