@@ -204,6 +204,12 @@
           <h2>继续观看</h2>
           <div class="custom-scroll-view">
             {% for ResumeMedia in ResumeMedias %}
+            {% set theLibLink = MediaServer.host %}
+            {% if "127.0.0.1" in theLibLink[0:16] %}
+              {% set theLibLink = theLibLink|replace("127.0.0.1",curdomainleft,1) %}
+            {% elif "localhost" in theLibLink[0:16] %}
+              {% set theLibLink = theLibLink|replace("localhost",curdomainleft,1) %}
+            {% endif %} 
             <a class="custom-scroll-list" href="{{ theLibLink }}web/index.html#!/item?id={{ ResumeMedia.Id }}&serverId={{ ResumeMedia.ServerId }}" target="_blank">
               {% if ResumeMedia.Thumb_image_url %}
                 <div class="bg-image" style="background-image: url('{{ResumeMedia.Thumb_image_url}}'); 
@@ -256,6 +262,12 @@
           <h2>{{ LatestMedia.name }}</h2>
           <div class="custom-scroll-view">
             {% for media in LatestMedia.data %}
+            {% set theLibLink = MediaServer.host %}
+            {% if "127.0.0.1" in theLibLink[0:16] %}
+              {% set theLibLink = theLibLink|replace("127.0.0.1",curdomainleft,1) %}
+            {% elif "localhost" in theLibLink[0:16] %}
+              {% set theLibLink = theLibLink|replace("localhost",curdomainleft,1) %}
+            {% endif %} 
             <a  class="custom-scroll-list" href="{{ theLibLink }}web/index.html#!/item?id={{ media.Id }}&serverId={{ media.ServerId }}" target="_blank">
               {% if media.Thumb_image_url %}
                 <div class="bg-image" style="background-image: url('{{media.Thumb_image_url}}'); 
