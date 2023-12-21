@@ -52,7 +52,7 @@ app:
   # 【登录界面壁纸】：themoviedb、bing，设置为themoviedb时需要配置TMDB API Key时才生效
   wallpaper: bing
   # Debug mode
-  debug: true
+  debug: false
 
 # 【配置媒体库信息】
   init_files:

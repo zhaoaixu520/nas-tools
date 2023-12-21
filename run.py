@@ -85,7 +85,7 @@ def get_run_config():
     _web_port = 3000
     _ssl_cert = None
     _ssl_key = None
-    _debug = True
+    _debug = False
 
     app_conf = Config().get_config('app')
     if app_conf:
