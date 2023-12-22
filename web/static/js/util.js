@@ -7,16 +7,10 @@ function ajax_post(cmd, params, handler, aync=true, show_progress=true) {
     if (show_progress) {
         NProgress.start();
     }
-    console.log('==params==================================');
-    console.log(params);
-    console.log('==params==================================');
     let data = {
         cmd: cmd,
         data: params
     };
-    console.log('==data==================================');
-    console.log(data);
-    console.log('==data==================================');
     $.ajax({
         type: "POST",
         url: "do?random=" + Math.random(),

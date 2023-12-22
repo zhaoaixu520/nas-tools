@@ -37,25 +37,17 @@ class IyuuMsg(_IMessageClient):
             return False, "参数未配置"
         try:
             sc_url = "http://iyuu.cn/%s.send?%s" % (self._token, urlencode({"text": title, "desp": text}))
-            print("=====================")
-            print("send_msg")
-            print(sc_url)
-            print("=====================")
             res = RequestUtils().get_res(sc_url, None, False)
             if res:
                 
                 ret_json = res.json()
                 errno = ret_json.get('errcode')
                 error = ret_json.get('errmsg')
-                print("=====================")
-                print(ret_json)
-                print("=====================")
                 if errno == 0:
                     return True, error
                 else:
                     return False, error
             else:
-                print("===未获取到返回信息=====")
                 return False, "未获取到返回信息"
         except Exception as msg_e:
             ExceptionUtils.exception_traceback(msg_e)

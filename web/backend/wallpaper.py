@@ -13,22 +13,11 @@ def get_login_wallpaper(today=datetime.datetime.strftime(datetime.datetime.now()
     获取Base64编码的壁纸图片
     """
     wallpaper = Config().get_config('app').get('wallpaper')
-    print("=============wallpaper====")
-    print(wallpaper)
-    print("=============wallpaper====")
     tmdbkey = Config().get_config('app').get('rmt_tmdbkey')
     if (not wallpaper or wallpaper == "themoviedb") and tmdbkey:
         img_url = __get_themoviedb_wallpaper(today)
-        print("=============wallpaper===themoviedb=")
-        print("themoviedb")
-        print(img_url)
-        print("=============wallpaper===themoviedb=")
     else:
         img_url = __get_bing_wallpaper(today)
-        print("=============wallpaper===bing=")
-        print("bing")
-        print(img_url)
-        print("=============wallpaper===bing=")
     if img_url:
         res = RequestUtils().get_res(img_url)
         if res and res.status_code == 200:
@@ -53,26 +42,15 @@ def __get_bing_wallpaper(today):
     获取Bing每日壁纸
     """
     url = "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&today=%s" % today
-    print("=============__get_bing_wallpaper====")
-    print(url)
-    print("=============__get_bing_wallpaper====")
     try:
         resp = RequestUtils(timeout=60).get_res(url)
     except Exception as err:
         ExceptionUtils.exception_traceback(err)
-        print("===========wallpaper==err====")
-        print(err)
-        print("===========wallpaper==err====")
         return ""
     if resp and resp.status_code == 200:
-        print("===========wallpaper==resp====")
-        print(resp)
-        print("===========wallpaper==resp====")
         if resp.json():
             for image in resp.json().get('images') or []:
                 return f"https://cn.bing.com{image.get('url')}"
     else:
-        print("-------------resp")
-        print(resp)
-        print("-------------resp")
+        return ""
     return ""

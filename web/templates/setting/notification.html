@@ -386,9 +386,6 @@
       });
     } else if (action === "test") {
       $("#test_message_client_btn").text("测试中").attr("disabled", true);
-      console.log('=params===================================');
-      console.log(params);
-      console.log('=params===================================');
       ajax_post("test_message_client", params, function (ret) {
         if (ret.code === 0) {
           $("#test_message_client_btn").text("测试成功").attr("disabled", false);

@@ -96,17 +96,8 @@ class RequestUtils:
             return None
 
     def get_res(self, url, params=None, allow_redirects=True):
-        print("=====================")
-        print(url)
-        print(self._session)
-        print(self)
-        print("=====================")
         try:
             if self._session:
-                print("=====================")
-                print("_session")
-                print(params)
-                print("=====================")
                 return self._session.get(url,
                                          params=params,
                                          verify=False,
@@ -116,14 +107,6 @@ class RequestUtils:
                                          timeout=self._timeout,
                                          allow_redirects=allow_redirects)
             else:
-                print("=====================")
-                print("requests")
-                print(params)
-                print(self._headers)
-                print(self._proxies)
-                print(self._cookies)
-                print(self._timeout)
-                print("=====================")
                 return requests.get(url,
                                     params=params,
                                     verify=False,
@@ -133,9 +116,6 @@ class RequestUtils:
                                     timeout=self._timeout,
                                     allow_redirects=allow_redirects)
         except requests.exceptions.RequestException as err:
-            print("===RequestException==================")
-            print(err)
-            print("===RequestException==================")
             return None
 
     def post_res(self, url, params=None, allow_redirects=True, files=None, json=None):

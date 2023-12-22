@@ -223,15 +223,10 @@ def index():
 
     # 获得所有媒体列表
     AllMedias = WebAction().get_all_medias()
-    print("==AllMedias===================")
-    print(AllMedias.get('data'))
-    print("==AllMedias===================")
+
 
     # 获取继续观看媒体列表
     ResumeMedias = WebAction().get_resume_medias()
-    print("==ResumeMedias===================")
-    print(ResumeMedias.get('data'))
-    print("==ResumeMedias===================")
 
     # 获取最新未播放的媒体列表
     LatestMedias = []
@@ -241,9 +236,6 @@ def index():
       for i, allMedias in enumerate(all_medias):
           if WebAction().get_latest_media_List(allMedias.get('Id')).get("code") == 0:
             LatestMedias.append({"name":allMedias.get("Name"),"data":WebAction().get_latest_media_List(allMedias.get('Id')).get("data")})
-    print("==LatestMedias===================")
-    print(LatestMedias)
-    print("==LatestMedias===================")
 
     # 磁盘空间
     LibrarySpaces = WebAction().get_library_spacesize()
