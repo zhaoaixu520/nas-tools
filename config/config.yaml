@@ -32,7 +32,7 @@ app:
   ssl_key:
   # 【TMDB API KEY】：需要在https://www.themoviedb.org/申请，必须配置，否则无法识别媒体资源和重命名
   # 以下地址需要网络能够正常访问：api.themoviedb.org、webservice.fanart.tv
-  rmt_tmdbkey: c51e4fc1e2a5f57a30b2308f118c8cc4
+  rmt_tmdbkey: 
   # 【使用TMDB服务器域名】：api.themoviedb.org、api.tmdb.org，如api.themoviedb.org无法访问可偿试使用api.tmdb.org
   tmdb_domain: api.tmdb.org
   # 【TMDB匹配模式】：normal、strict，normal模式下如使用文件名/种子名中的年份无法匹配到媒体信息，会去掉年份再匹配一次；strict模式则严格按文件中年份匹配
@@ -106,9 +106,9 @@ media:
 # 配置Emby服务器信息
 emby:
   # 【Emby服务器IP地址和端口】：注意区分http和https，http时可以不加http://，https时必须加https://
-  host: http://192.168.194.103:8096
+  host: http://127.0.0.1:8096
   # 【Emby ApiKey】：在Emby设置->高级->API密钥处生成，注意不要复制到了应用名称
-  api_key: c9064e5b822c4fa88e9395b8494cc2e7
+  api_key: 
 
 # 配置Jellyfin服务器信息
 jellyfin:
@@ -224,11 +224,11 @@ pt:
 # 【配置Jackett检索器】
 jackett:
   # 【Jackett地址】：Jackett地址和端口，格式：http(s)://IP:PORT
-  host: http://192.168.194.103:9117/
+  host: http://127.0.0.1:9117/
   # 【Jackett ApiKey】：Jackett配置页面右上角复制API Key
-  api_key: albs4z51acu8w2icga7i2vkyhmufu5y8
+  api_key: 
   # 【Jackett管理密码】：如未设置可为空
-  password: '01063818'
+  password: 
 
 # 【配置prowlarr检索器】
 prowlarr:
@@ -240,11 +240,11 @@ prowlarr:
 # 【配置qBittorrent下载软件】：pt区的pt_client如配置为qbittorrent则需要同步配置该项
 qbittorrent:
   # 【qBittorrent IP地址和端口】：注意如果qb启动了HTTPS证书，则需要配置为https://IP
-  qbhost: http://192.168.194.103
+  qbhost: http://127.0.0.0
   qbport: '8085'
   # qBittorrent 登录用户名和密码
-  qbusername: admin
-  qbpassword: adminadmin
+  qbusername: 
+  qbpassword: 
   # 转移完成后是否自动强制作种，按需要设置
   force_upload: true
   # 是否开始自动管理模式
