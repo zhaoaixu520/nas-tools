@@ -3526,12 +3526,12 @@ class WebAction:
             }
 
     @staticmethod
-    def get_latest_media_List(parentId):
+    def get_latest_media_list(parentId):
         """
         获取最新未播放的movies列表
         """
-        MediaServerClient = MediaServer()
-        latest_medias = MediaServerClient.get_latest_media_List(parentId)
+        media_server_client = MediaServer()
+        latest_medias = media_server_client.get_latest_media_list(parentId)
         if latest_medias:
             return {
                 "code":0,

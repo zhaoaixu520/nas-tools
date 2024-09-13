@@ -22,6 +22,8 @@ from app.utils.types import MediaType, SyncType, RmtMode
 from config import RMT_SUBEXT, RMT_MEDIAEXT, RMT_FAVTYPE, RMT_MIN_FILESIZE, DEFAULT_MOVIE_FORMAT, \
     DEFAULT_TV_FORMAT, Config
 
+from app.helper import FfmpegHelper
+
 lock = Lock()
 
 
@@ -640,6 +642,10 @@ class FileTransfer:
                 if dist_path and not os.path.exists(dist_path):
                     return __finish_transfer(False, "目录不存在：%s" % dist_path)
 
+                codec_data = FfmpegHelper().get_audio_video_codec(file_item)
+
+                media.audio_encode = codec_data['audio_codec']
+                media.video_encode = codec_data['video_codec']
                 # 判断文件是否已存在，返回：目录存在标志、目录名、文件存在标志、文件名
                 dir_exist_flag, ret_dir_path, file_exist_flag, ret_file_path = self.__is_media_exists(dist_path, media)
                 # 新文件后缀

@@ -153,10 +153,6 @@ def login():
 
         LoginWallpaper = get_login_wallpaper()
 
-        print("LoginWallpaper")
-        print(LoginWallpaper)
-        print("LoginWallpaper")
-
         return render_template('login.html',
                                GoPage=GoPage,
                                LoginWallpaper=LoginWallpaper,
@@ -234,8 +230,9 @@ def index():
     if AllMedias.get('code') == 0:
       all_medias = AllMedias.get('data')
       for i, allMedias in enumerate(all_medias):
-          if WebAction().get_latest_media_List(allMedias.get('Id')).get("code") == 0:
-            LatestMedias.append({"name":allMedias.get("Name"),"data":WebAction().get_latest_media_List(allMedias.get('Id')).get("data")})
+          if WebAction().get_latest_media_list(allMedias.get('Id')).get("code") == 0:
+
+            LatestMedias.append({"name":allMedias.get("Name"),"data":WebAction().get_latest_media_list(allMedias.get('Id')).get("data")})
 
     # 磁盘空间
     LibrarySpaces = WebAction().get_library_spacesize()

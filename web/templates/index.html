@@ -1,5 +1,4 @@
-{% import 'macro/svg.html' as SVG %}
-{% import 'macro/oops.html' as OOPS %}
+{% import 'macro/svg.html' as SVG %} {% import 'macro/oops.html' as OOPS %}
 <div class="container-xl">
   <!-- Page title -->
   <!-- AllMedias=AllMedias,
@@ -8,17 +7,20 @@
   <div class="page-header d-print-none">
     <div class="row align-items-center">
       <div class="col">
-        <h2 class="page-title">
-          我的媒体库
-        </h2>
+        <h2 class="page-title">我的媒体库</h2>
       </div>
       <div class="col-auto ms-auto d-print-none">
         <div class="btn-list">
-          <a href="javascript:show_mediasync_modal()" class="btn btn-primary d-none d-sm-inline-block">
-            {{ SVG.refresh() }}
-            媒体库同步
+          <a
+            href="javascript:show_mediasync_modal()"
+            class="btn btn-primary d-none d-sm-inline-block"
+          >
+            {{ SVG.refresh() }} 媒体库同步
           </a>
-          <a href="javascript:show_mediasync_modal()" class="btn btn-primary d-sm-none btn-icon">
+          <a
+            href="javascript:show_mediasync_modal()"
+            class="btn btn-primary d-sm-none btn-icon"
+          >
             {{ SVG.refresh() }}
           </a>
         </div>
@@ -27,297 +29,350 @@
   </div>
 </div>
 {% if ServerSucess %}
-  <div class="page-body">
-    <div class="container-xl">
-      <div class="row row-deck row-cards">
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="card">
-            <div class="card-stamp">
-              <div class="card-stamp-icon">
-                <img src="../static/img/movie.jpg">
-              </div>
+<div class="page-body">
+  <div class="container-xl">
+    <div class="row row-deck row-cards">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card">
+          <div class="card-stamp">
+            <div class="card-stamp-icon">
+              <img src="../static/img/movie.jpg" />
             </div>
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <div class="subheader">电影</div>
-              </div>
-              <div class="d-flex align-items-baseline">
-                <div class="h1 mb-0 me-2">{{ MediaCount.MovieCount }}</div>
-              </div>
-            </div>
-            <div id="chart-movie-bg" class="chart-sm"></div>
           </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="card">
-            <div class="card-stamp">
-              <div class="card-stamp-icon">
-                <img src="../static/img/tv.png">
-              </div>
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="subheader">电影</div>
             </div>
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <div class="subheader">电视剧/动漫</div>
-              </div>
-              <div class="d-flex align-items-baseline">
-                <div class="h1 mb-3 me-2">{{ MediaCount.SeriesCount }}</div>
-                <div class="me-auto">
+            <div class="d-flex align-items-baseline">
+              <div class="h1 mb-0 me-2">{{ MediaCount.MovieCount }}</div>
+            </div>
+          </div>
+          <div id="chart-movie-bg" class="chart-sm"></div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card">
+          <div class="card-stamp">
+            <div class="card-stamp-icon">
+              <img src="../static/img/tv.png" />
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="subheader">电视剧/动漫</div>
+            </div>
+            <div class="d-flex align-items-baseline">
+              <div class="h1 mb-3 me-2">{{ MediaCount.SeriesCount }}</div>
+              <div class="me-auto">
                 <span class="text-green d-inline-flex align-items-center lh-1">
                   {{ MediaCount.EpisodeCount }}
                 </span>
-                </div>
-              </div>
-            </div>
-            <!-- <div id="chart-tv-bg" class="chart-sm" style="background-image: url(../static/img/tv_bg.png)"></div> -->
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="card">
-            <div class="card-stamp">
-              <div class="card-stamp-icon">
-                <img src="../static/img/music.png">
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <div class="subheader">音乐</div>
-              </div>
-              <div class="d-flex align-items-baseline">
-                <div class="h1 mb-3 me-2">{{ MediaCount.SongCount }}</div>
               </div>
             </div>
           </div>
+          <!-- <div id="chart-tv-bg" class="chart-sm" style="background-image: url(../static/img/tv_bg.png)"></div> -->
         </div>
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="card">
-            <div class="card-stamp">
-              <div class="card-stamp-icon" >
-                <img src="../static/img/users.png">
-              </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card">
+          <div class="card-stamp">
+            <div class="card-stamp-icon">
+              <img src="../static/img/music.png" />
             </div>
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <div class="subheader">活跃用户</div>
-              </div>
-              <div class="d-flex align-items-baseline">
-                <div class="h1 mb-3 me-2">{{ UserCount }}</div>
-              </div>
+          </div>
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="subheader">音乐</div>
+            </div>
+            <div class="d-flex align-items-baseline">
+              <div class="h1 mb-3 me-2">{{ MediaCount.SongCount }}</div>
             </div>
           </div>
         </div>
-        {% with curdomainleft = request.host.split(':')[0] %}
-        <div class="container">
-          <h2>我的媒体</h2>
-          <div class="custom-scroll-view">
-            {% for AllMedia in AllMedias %}
-              {% set theLibLink = MediaServer.host %}
-              {% if "127.0.0.1" in theLibLink[0:16] %}
-                {% set theLibLink = theLibLink|replace("127.0.0.1",curdomainleft,1) %}
-              {% elif "localhost" in theLibLink[0:16] %}
-                {% set theLibLink = theLibLink|replace("localhost",curdomainleft,1) %}
-              {% endif %} 
-              {% if AllMedia.CollectionType == 'music' %}
-                
-                <a class="custom-scroll-list" 
-                  href="{{ theLibLink }}web/index.html#!/music?parentId={{ AllMedia.Id }}&serverId={{ AllMedia.ServerId }}" target="_blank"
-                >
-                    {% if AllMedia.Thumb_image_url %}
-                      <div class="bg-image" style="background-image: url('{{AllMedia.Thumb_image_url}}'); 
-                        background-repeat: no-repeat; 
-                        background-size: contain; 
-                        -webkit-background-size: contain; 
-                        -o-background-size: contain; 
-                        background-position: center 0;">
-                      </div>
-                    {% elif AllMedia.Primary_image_url %}
-                      <div class="bg-image" style="background-image: url('{{AllMedia.Primary_image_url}}'); 
-                        background-repeat: no-repeat; 
-                        background-size: contain; 
-                        -webkit-background-size: contain; 
-                        -o-background-size: contain; 
-                        background-position: center 0;">
-                      </div>
-                    {% elif AllMedia.Banner_image_url %}
-                      <div class="bg-image" style="background-image: url('{{AllMedia.Banner_image_url}}'); 
-                        background-repeat: no-repeat; 
-                        background-size: contain; 
-                        -webkit-background-size: contain; 
-                        -o-background-size: contain; 
-                        background-position: center 0;">
-                      </div>
-                    {% else %}
-                      <div class="bg-image" style="background-image: url('../static/img/tv_bg.png'); 
-                        background-repeat: no-repeat; 
-                        background-size: contain; 
-                        -webkit-background-size: contain; 
-                        -o-background-size: contain; 
-                        background-position: center 0;">
-                      </div>
-                    {% endif %}
-                  <p style="margin-top: 4px;">{{ AllMedia.Name }}</p>
-                </a>
-              {% else %}
-                <a class="custom-scroll-list" 
-                  href="{{ theLibLink }}web/index.html#!/videos?parentId={{ AllMedia.Id }}&serverId={{ AllMedia.ServerId }}" target="_blank"
-                >
-                    {% if AllMedia.Thumb_image_url %}
-                      <div class="bg-image" style="background-image: url('{{AllMedia.Thumb_image_url}}'); 
-                        background-repeat: no-repeat; 
-                        background-size: contain; 
-                        -webkit-background-size: contain; 
-                        -o-background-size: contain; 
-                        background-position: center 0;">
-                      </div>
-                    {% elif AllMedia.Primary_image_url %}
-                      <div class="bg-image" style="background-image: url('{{AllMedia.Primary_image_url}}'); 
-                        background-repeat: no-repeat; 
-                        background-size: contain; 
-                        -webkit-background-size: contain; 
-                        -o-background-size: contain; 
-                        background-position: center 0;">
-                      </div>
-                    {% elif AllMedia.Banner_image_url %}
-                      <div class="bg-image" style="background-image: url('{{AllMedia.Banner_image_url}}'); 
-                        background-repeat: no-repeat; 
-                        background-size: contain; 
-                        -webkit-background-size: contain; 
-                        -o-background-size: contain; 
-                        background-position: center 0;">
-                      </div>
-                    {% else %}
-                      <div class="bg-image" style="background-image: url('../static/img/tv_bg.png'); 
-                        background-repeat: no-repeat; 
-                        background-size: contain; 
-                        -webkit-background-size: contain; 
-                        -o-background-size: contain; 
-                        background-position: center 0;">
-                      </div>
-                    {% endif %}
-                  <p style="margin-top: 4px;">{{ AllMedia.Name }}</p>
-                </a>
-              {% endif %}
-            {% endfor %}
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card">
+          <div class="card-stamp">
+            <div class="card-stamp-icon">
+              <img src="../static/img/users.png" />
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="subheader">活跃用户</div>
+            </div>
+            <div class="d-flex align-items-baseline">
+              <div class="h1 mb-3 me-2">{{ UserCount }}</div>
+            </div>
           </div>
         </div>
+      </div>
+      {% with curdomainleft = request.host.split(':')[0] %}
+      <div class="container">
+        <h2>我的媒体</h2>
+        <div class="custom-scroll-view">
+          {% for AllMedia in AllMedias %} {% set theLibLink = MediaServer.host
+          %} {% if "127.0.0.1" in theLibLink[0:16] %} {% set theLibLink =
+          theLibLink|replace("127.0.0.1",curdomainleft,1) %} {% elif "localhost"
+          in theLibLink[0:16] %} {% set theLibLink =
+          theLibLink|replace("localhost",curdomainleft,1) %} {% endif %} {% if
+          AllMedia.CollectionType == 'music' %}
 
-        <div>
-          <h2>继续观看</h2>
-          <div class="custom-scroll-view">
-            {% for ResumeMedia in ResumeMedias %}
-            {% set theLibLink = MediaServer.host %}
-            {% if "127.0.0.1" in theLibLink[0:16] %}
-              {% set theLibLink = theLibLink|replace("127.0.0.1",curdomainleft,1) %}
-            {% elif "localhost" in theLibLink[0:16] %}
-              {% set theLibLink = theLibLink|replace("localhost",curdomainleft,1) %}
-            {% endif %} 
-            <a class="custom-scroll-list" href="{{ theLibLink }}web/index.html#!/item?id={{ ResumeMedia.Id }}&serverId={{ ResumeMedia.ServerId }}" target="_blank">
-              {% if ResumeMedia.Thumb_image_url %}
-                <div class="bg-image" style="background-image: url('{{ResumeMedia.Thumb_image_url}}'); 
+          <a
+            class="custom-scroll-list"
+            href="{{ theLibLink }}web/index.html#!/music?parentId={{ AllMedia.Id }}&serverId={{ AllMedia.ServerId }}"
+            target="_blank"
+          >
+            {% if AllMedia.Thumb_image_url %}
+            <div
+              class="bg-image"
+              style="background-image: url('{{AllMedia.Thumb_image_url}}'); 
+                        background-repeat: no-repeat; 
+                        background-size: contain; 
+                        -webkit-background-size: contain; 
+                        -o-background-size: contain; 
+                        background-position: center 0;"
+            ></div>
+            {% elif AllMedia.Primary_image_url %}
+            <div
+              class="bg-image"
+              style="background-image: url('{{AllMedia.Primary_image_url}}'); 
+                        background-repeat: no-repeat; 
+                        background-size: contain; 
+                        -webkit-background-size: contain; 
+                        -o-background-size: contain; 
+                        background-position: center 0;"
+            ></div>
+            {% elif AllMedia.Banner_image_url %}
+            <div
+              class="bg-image"
+              style="background-image: url('{{AllMedia.Banner_image_url}}'); 
+                        background-repeat: no-repeat; 
+                        background-size: contain; 
+                        -webkit-background-size: contain; 
+                        -o-background-size: contain; 
+                        background-position: center 0;"
+            ></div>
+            {% else %}
+            <div
+              class="bg-image"
+              style="
+                background-image: url('../static/img/tv_bg.png');
+                background-repeat: no-repeat;
+                background-size: contain;
+                -webkit-background-size: contain;
+                -o-background-size: contain;
+                background-position: center 0;
+              "
+            ></div>
+            {% endif %}
+            <p style="margin-top: 4px">{{ AllMedia.Name }}</p>
+          </a>
+          {% else %}
+          <a
+            class="custom-scroll-list"
+            href="{{ theLibLink }}web/index.html#!/videos?parentId={{ AllMedia.Id }}&serverId={{ AllMedia.ServerId }}"
+            target="_blank"
+          >
+            {% if AllMedia.Thumb_image_url %}
+            <div
+              class="bg-image"
+              style="background-image: url('{{AllMedia.Thumb_image_url}}'); 
+                        background-repeat: no-repeat; 
+                        background-size: contain; 
+                        -webkit-background-size: contain; 
+                        -o-background-size: contain; 
+                        background-position: center 0;"
+            ></div>
+            {% elif AllMedia.Primary_image_url %}
+            <div
+              class="bg-image"
+              style="background-image: url('{{AllMedia.Primary_image_url}}'); 
+                        background-repeat: no-repeat; 
+                        background-size: contain; 
+                        -webkit-background-size: contain; 
+                        -o-background-size: contain; 
+                        background-position: center 0;"
+            ></div>
+            {% elif AllMedia.Banner_image_url %}
+            <div
+              class="bg-image"
+              style="background-image: url('{{AllMedia.Banner_image_url}}'); 
+                        background-repeat: no-repeat; 
+                        background-size: contain; 
+                        -webkit-background-size: contain; 
+                        -o-background-size: contain; 
+                        background-position: center 0;"
+            ></div>
+            {% else %}
+            <div
+              class="bg-image"
+              style="
+                background-image: url('../static/img/tv_bg.png');
+                background-repeat: no-repeat;
+                background-size: contain;
+                -webkit-background-size: contain;
+                -o-background-size: contain;
+                background-position: center 0;
+              "
+            ></div>
+            {% endif %}
+            <p style="margin-top: 4px">{{ AllMedia.Name }}</p>
+          </a>
+          {% endif %} {% endfor %}
+        </div>
+      </div>
+
+      <div>
+        <h2>继续观看</h2>
+        <div class="custom-scroll-view">
+          {% for ResumeMedia in ResumeMedias %} {% set theLibLink =
+          MediaServer.host %} {% if "127.0.0.1" in theLibLink[0:16] %} {% set
+          theLibLink = theLibLink|replace("127.0.0.1",curdomainleft,1) %} {%
+          elif "localhost" in theLibLink[0:16] %} {% set theLibLink =
+          theLibLink|replace("localhost",curdomainleft,1) %} {% endif %}
+          <a
+            class="custom-scroll-list"
+            href="{{ theLibLink }}web/index.html#!/item?id={{ ResumeMedia.Id }}&serverId={{ ResumeMedia.ServerId }}"
+            target="_blank"
+          >
+            {% if ResumeMedia.Thumb_image_url %}
+            <div
+              class="bg-image"
+              style="background-image: url('{{ResumeMedia.Thumb_image_url}}'); 
                   background-repeat: no-repeat; 
                   background-size: contain; 
                   -webkit-background-size: contain; 
                   -o-background-size: contain; 
-                  background-position: center 0;">
-                </div>
-              {% elif ResumeMedia.Primary_image_url %}
-                <div class="bg-image" style="background-image: url('{{ResumeMedia.Primary_image_url}}'); 
+                  background-position: center 0;"
+            ></div>
+            {% elif ResumeMedia.Primary_image_url %}
+            <div
+              class="bg-image"
+              style="background-image: url('{{ResumeMedia.Primary_image_url}}'); 
                   background-repeat: no-repeat; 
                   background-size: contain; 
                   -webkit-background-size: contain; 
                   -o-background-size: contain; 
-                  background-position: center 0;">
-                </div>
-              {% elif ResumeMedia.Banner_image_url %}
-                <div class="bg-image" style="background-image: url('{{ResumeMedia.Banner_image_url}}'); 
+                  background-position: center 0;"
+            ></div>
+            {% elif ResumeMedia.Banner_image_url %}
+            <div
+              class="bg-image"
+              style="background-image: url('{{ResumeMedia.Banner_image_url}}'); 
                   background-repeat: no-repeat; 
                   background-size: contain; 
                   -webkit-background-size: contain; 
                   -o-background-size: contain; 
-                  background-position: center 0;">
-                </div>
-              {% else %}
-                <div class="bg-image" style="background-image: url('../static/img/tv_bg.png'); 
-                  background-repeat: no-repeat; 
-                  background-size: contain; 
-                  -webkit-background-size: contain; 
-                  -o-background-size: contain; 
-                  background-position: center 0;">
-                </div>
-              {% endif %}
-              <p style="margin-top: 4px; 
+                  background-position: center 0;"
+            ></div>
+            {% else %}
+            <div
+              class="bg-image"
+              style="
+                background-image: url('../static/img/tv_bg.png');
+                background-repeat: no-repeat;
+                background-size: contain;
+                -webkit-background-size: contain;
+                -o-background-size: contain;
+                background-position: center 0;
+              "
+            ></div>
+            {% endif %}
+            <p
+              style="
+                margin-top: 4px;
                 overflow: hidden;
-                white-space: nowrap; 
-                text-overflow: ellipsis; 
-                width: 23rem; ">
-                {{ ResumeMedia.Name }}
-              </p>
-            </a>
-            {% endfor %}
-          </div>
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                width: 23rem;
+              "
+            >
+              {{ ResumeMedia.Name }}
+            </p>
+          </a>
+          {% endfor %}
         </div>
+      </div>
 
+      <div>
+        {% for LatestMedia in LatestMedias %}
         <div>
-          {% for LatestMedia in LatestMedias %}
-          <div>
           <h2>{{ LatestMedia.name }}</h2>
           <div class="custom-scroll-view">
-            {% for media in LatestMedia.data %}
-            {% set theLibLink = MediaServer.host %}
-            {% if "127.0.0.1" in theLibLink[0:16] %}
-              {% set theLibLink = theLibLink|replace("127.0.0.1",curdomainleft,1) %}
-            {% elif "localhost" in theLibLink[0:16] %}
-              {% set theLibLink = theLibLink|replace("localhost",curdomainleft,1) %}
-            {% endif %} 
-            <a  class="custom-scroll-list" href="{{ theLibLink }}web/index.html#!/item?id={{ media.Id }}&serverId={{ media.ServerId }}" target="_blank">
+            {% for media in LatestMedia.data %} {% set theLibLink =
+            MediaServer.host %} {% if "127.0.0.1" in theLibLink[0:16] %} {% set
+            theLibLink = theLibLink|replace("127.0.0.1",curdomainleft,1) %} {%
+            elif "localhost" in theLibLink[0:16] %} {% set theLibLink =
+            theLibLink|replace("localhost",curdomainleft,1) %} {% endif %}
+            <a
+              class="custom-scroll-list"
+              href="{{ theLibLink }}web/index.html#!/item?id={{ media.Id }}&serverId={{ media.ServerId }}"
+              target="_blank"
+            >
               {% if media.Thumb_image_url %}
-                <div class="bg-image" style="background-image: url('{{media.Thumb_image_url}}'); 
+              <div
+                class="bg-image"
+                style="background-image: url('{{media.Thumb_image_url}}'); 
                   background-repeat: no-repeat; 
-                  background-size: contain; 
+                  background-size: contain;
                   -webkit-background-size: contain; 
                   -o-background-size: contain; 
-                  background-position: center 0;">
-                </div>
+                  background-position: center 0;"
+              ></div>
               {% elif media.Primary_image_url %}
-                <div class="bg-image" style="background-image: url('{{media.Primary_image_url}}'); 
+              <div
+                class="bg-image"
+                style="background-image: url('{{media.Primary_image_url}}'); 
                   background-repeat: no-repeat; 
-                  background-size: contain; 
+                  background-size: contain;
                   -webkit-background-size: contain; 
                   -o-background-size: contain; 
-                  background-position: center 0;">
-                </div>
+                  background-position: center 0;"
+              ></div>
               {% elif media.Banner_image_url %}
-                <div class="bg-image" style="background-image: url('{{media.Banner_image_url}}'); 
+              <div
+                class="bg-image"
+                style="background-image: url('{{media.Banner_image_url}}'); 
                   background-repeat: no-repeat; 
-                  background-size: contain; 
+                  background-size: contain;
                   -webkit-background-size: contain; 
                   -o-background-size: contain; 
-                  background-position: center 0;">
-                </div>
+                  background-position: center 0;"
+              ></div>
               {% else %}
-                <div class="bg-image" style="background-image: url('../static/img/tv_bg.png'); 
-                  background-repeat: no-repeat; 
-                  background-size: contain; 
-                  -webkit-background-size: contain; 
-                  -o-background-size: contain; 
-                  background-position: center 0;">
-                </div>
+              <div
+                class="bg-image"
+                style="
+                  background-image: url('../static/img/tv_bg.png');
+                  background-repeat: no-repeat;
+                  background-size: contain;
+                  -webkit-background-size: contain;
+                  -o-background-size: contain;
+                  background-position: center 0;
+                "
+              ></div>
               {% endif %}
-              <p style="margin-top: 4px; 
-                overflow: hidden;
-                white-space: nowrap; 
-                text-overflow: ellipsis; 
-                width: 23rem; ">
+              <p
+                style="
+                  margin-top: 4px;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  width: 23rem;
+                "
+              >
                 {{ media.Name }}
               </p>
             </a>
             {% endfor %}
-         </div>
+          </div>
         </div>
-          {% endfor %}
-        </div>
-        {% endwith %}
+        {% endfor %}
+      </div>
+      {% endwith %}
 
-        <!-- <div class="col-lg-12">
+      <!-- <div class="col-lg-12">
           <div class="row row-cards">
             <div class="col-12">
               <div class="card">
@@ -375,29 +430,49 @@
             </div>
           </div>
         </div> -->
-      </div>
     </div>
   </div>
-{% else %}
-{{ OOPS.systemerror('媒体服务器连接失败！', '当前无法连接媒体服务器获取数据，请确认Emby/Jellyfin/Plex配置是否正确。') }}
-{% endif %}
-<div class="modal modal-blur fade" id="index-mediasync-modal" tabindex="-1" role="dialog" aria-hidden="true">
+</div>
+{% else %} {{ OOPS.systemerror('媒体服务器连接失败！',
+'当前无法连接媒体服务器获取数据，请确认Emby/Jellyfin/Plex配置是否正确。') }} {%
+endif %}
+<div
+  class="modal modal-blur fade"
+  id="index-mediasync-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-md modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="card border-0">
         <div class="card-body text-center">
           <div class="mb-3">
-            <span class="avatar avatar-xl avatar-rounded"
-                  style="background-image: url(../static/img/{{ MediaServerType }}.png)"></span>
+            <span
+              class="avatar avatar-xl avatar-rounded"
+              style="background-image: url(../static/img/{{ MediaServerType }}.png)"
+            ></span>
           </div>
           <div class="card-title mb-1">{{ MediaServerType|title }}</div>
           <div class="text-muted" id="mediasync_status"></div>
         </div>
         <div class="card-progress">
-          <div class="progress-bar bg-green" id="mediasync_process_bar" style="width: 0%" role="progressbar"
-               aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          <div
+            class="progress-bar bg-green"
+            id="mediasync_process_bar"
+            style="width: 0%"
+            role="progressbar"
+            aria-valuenow="0"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
         </div>
-        <a href="javascript:start_media_sync(true)" id="mediasync_btn" class="card-btn">开始同步</a>
+        <a
+          href="javascript:start_media_sync(true)"
+          id="mediasync_btn"
+          class="card-btn"
+          >开始同步</a
+        >
       </div>
     </div>
   </div>
@@ -513,81 +588,105 @@
   //显示媒体库同步框
   function show_mediasync_modal() {
     //获取同步状态
-    ajax_post("refresh_process", {type: "mediasync"}, function (ret) {
-      if (ret.code === 0 && ret.value < 100) {
-        //同步中
-        $("#index-mediasync-modal").modal('show');
-        start_media_sync(false);
-      } else {
-        //没有在同步，获取目前同步的数据情况
-        ajax_post("mediasync_state", {}, function (ret) {
-          if (ret.code === 0) {
-            $("#mediasync_status").text(ret.text);
-          }
-          $("#mediasync_btn").text("开始同步")
-              .attr("href", "javascript:start_media_sync(true)");
-          $("#index-mediasync-modal").modal('show');
-        }, true, false);
-      }
-    }, true, false);
+    ajax_post(
+      "refresh_process",
+      { type: "mediasync" },
+      function (ret) {
+        if (ret.code === 0 && ret.value < 100) {
+          //同步中
+          $("#index-mediasync-modal").modal("show")
+          start_media_sync(false)
+        } else {
+          //没有在同步，获取目前同步的数据情况
+          ajax_post(
+            "mediasync_state",
+            {},
+            function (ret) {
+              if (ret.code === 0) {
+                $("#mediasync_status").text(ret.text)
+              }
+              $("#mediasync_btn")
+                .text("开始同步")
+                .attr("href", "javascript:start_media_sync(true)")
+              $("#index-mediasync-modal").modal("show")
+            },
+            true,
+            false
+          )
+        }
+      },
+      true,
+      false
+    )
   }
 
   //关闭媒体库同步框
   function close_mediasync_modal() {
-    $("#index-mediasync-modal").modal('hide');
-    refresh_sync_process_flag = false;
+    $("#index-mediasync-modal").modal("hide")
+    refresh_sync_process_flag = false
   }
 
   //开始媒体库同步
   function start_media_sync(flag) {
-    $("#mediasync_btn").text("关闭")
-        .attr("href", "javascript:close_mediasync_modal()");
+    $("#mediasync_btn")
+      .text("关闭")
+      .attr("href", "javascript:close_mediasync_modal()")
     if (flag) {
-      ajax_post("start_mediasync", {}, function (ret) {
-        refresh_sync_process_flag = true;
-        refresh_sync_process();
-      }, true, false);
+      ajax_post(
+        "start_mediasync",
+        {},
+        function (ret) {
+          refresh_sync_process_flag = true
+          refresh_sync_process()
+        },
+        true,
+        false
+      )
     } else {
-      refresh_sync_process_flag = true;
-      refresh_sync_process();
+      refresh_sync_process_flag = true
+      refresh_sync_process()
     }
   }
 
   //刷新进度及文件
-  var refresh_sync_process_flag = false;
+  var refresh_sync_process_flag = false
   function refresh_sync_process() {
     if (!refresh_sync_process_flag) {
-      return;
+      return
     }
-    ajax_post("refresh_process", {type: "mediasync"}, function (ret) {
-      if (ret.code === 0) {
-        $("#mediasync_process_bar").attr("style", "width: " + ret.value + "%")
-            .attr("aria-valuenow", ret.value);
-        $("#mediasync_status").text(ret.text);
-      }
-      if (ret.value < 100) {
-        setTimeout("refresh_sync_process()", 200);
-      }
-    }, true, false);
+    ajax_post(
+      "refresh_process",
+      { type: "mediasync" },
+      function (ret) {
+        if (ret.code === 0) {
+          $("#mediasync_process_bar")
+            .attr("style", "width: " + ret.value + "%")
+            .attr("aria-valuenow", ret.value)
+          $("#mediasync_status").text(ret.text)
+        }
+        if (ret.value < 100) {
+          setTimeout("refresh_sync_process()", 200)
+        }
+      },
+      true,
+      false
+    )
   }
-
 </script>
 
 <!-- JavaScript 部分 -->
 <script type="text/javascript">
   function openMediaPage(host, id, serverId, collectionType) {
-    
-    var link = `${host}web/index.html#!/videos?parentId=${id}&serverId=${serverId}`;
-    if (collectionType === "music" ) {
-      link = `${host}web/index.html#!/music?parentId=${id}&serverId=${serverId}`;
-    } 
-      // 生成链接
-      
-      // http://192.168.194.103:8096/web/index.html#!/videos?serverId=2da43fad62214632b4413c10c177ae76&parentId=4
+    var link = `${host}web/index.html#!/videos?parentId=${id}&serverId=${serverId}`
+    if (collectionType === "music") {
+      link = `${host}web/index.html#!/music?parentId=${id}&serverId=${serverId}`
+    }
+    // 生成链接
 
+    // http://192.168.194.103:8096/web/index.html#!/videos?serverId=2da43fad62214632b4413c10c177ae76&parentId=4
 
-      // 在新窗口中打开链接
-      window.open(link, '_blank');
+    // 在新窗口中打开链接
+    window.open(link, "_blank")
   }
 </script>
 
@@ -631,6 +730,22 @@
     color: inherit;
   }
 
+  .custom-scroll-view .custom-scroll-tiny-list {
+    width: 12.95rem;
+    border: none;
+    white-space: nowrap;
+    display: flex; /* 使用 Flex 布局 */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-right: 10px; /* 设置列表项之间的间距，可以根据需要调整 */
+    list-style: none; /* 去掉列表项默认的样式 */
+    padding: 0; /* 去掉列表项的内边距 */
+    background-color: transparent;
+    text-decoration: none; /* 去除下划线 */
+    color: inherit;
+  }
+
   .custom-scroll-view .custom-scroll-list .bg-image {
     flex: 0 0 auto; /* 不要拉伸/收缩列表项 */
     margin-right: 10px; /* 设置列表项之间的间距，可以根据需要调整 */
@@ -638,6 +753,16 @@
     width: 23rem;
     height: 12.95rem;
     border-radius: 12px;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .custom-scroll-view .custom-scroll-tiny-list .bg-image {
+    flex: 0 0 auto; /* 不要拉伸/收缩列表项 */
+    margin-right: 10px; /* 设置列表项之间的间距，可以根据需要调整 */
+    padding: 0px;
+    height: 19.18rem;
+    width: 12.85rem;
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.3);
   }
 </style>

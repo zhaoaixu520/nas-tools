@@ -594,7 +594,7 @@ class Emby(_IMediaClient):
           ExceptionUtils.exception_traceback(e)
           return []
     
-    def get_latest_media_List(self, parentId):
+    def get_latest_media_list(self, parentId):
         """
          获取最新未播放的媒体列表
         """
