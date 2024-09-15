@@ -8,7 +8,7 @@ from app.utils.path_utils import PathUtils
 from app.utils.exception_utils import ExceptionUtils
 from app.utils.types import OsType
 from config import WEBDRIVER_PATH
-
+import json
 
 class SystemUtils:
 
@@ -94,6 +94,18 @@ class SystemUtils:
         try:
             with os.popen(cmd) as p:
                 return p.readline().strip()
+        except Exception as err:
+            print(str(err))
+            return ""
+
+    @staticmethod
+    def execute_get_json(cmd):
+        """
+        执行命令，获得返回结果
+        """
+        try:
+            result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+            return json.loads(result.stdout)
         except Exception as err:
             print(str(err))
             return ""

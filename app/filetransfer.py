@@ -646,6 +646,7 @@ class FileTransfer:
 
                 media.audio_encode = codec_data['audio_codec']
                 media.video_encode = codec_data['video_codec']
+                media.resource_pix = codec_data['resource_pix']
                 # 判断文件是否已存在，返回：目录存在标志、目录名、文件存在标志、文件名
                 dir_exist_flag, ret_dir_path, file_exist_flag, ret_file_path = self.__is_media_exists(dist_path, media)
                 # 新文件后缀
